@@ -7,7 +7,7 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-subtitler = { path = "../../subtitler", default-features = false, features = [
+subtitler = { version = "2.6.1", default-features = false, features = [
   "srt", "vtt", "ass", "ssa", "microdvd", "subviewer",
   "ttml", "sbv", "lrc", "sami", "mpl2", "scc", "ebu_stl", "wasm"
 ] }
