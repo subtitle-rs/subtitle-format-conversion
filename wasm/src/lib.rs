@@ -115,6 +115,87 @@ pub fn convert_subtitle(content: &str, target: &str) -> String {
     .to_string()
 }
 
+/// 字幕信息。
+///   {"ok":true,"format":"srt","count":N,"total_duration_ms":N,
+///    "first_timestamp":N,"last_timestamp":N}
+///   {"ok":false,"error":"..."}
+#[wasm_bindgen]
+pub fn get_info_subtitle(content: &str) -> String {
+    use subtitler::model::SubtitleFormat as _;
+
+    let file = match subtitler::parse_bytes(content.as_bytes()) {
+        Ok(f) => f,
+        Err(e) => {
+            return serde_json::json!({ "ok": false, "error": e.to_string() }).to_string();
+        }
+    };
+    let subs = file.subtitles();
+    let (first, last) = match (subs.first(), subs.last()) {
+        (Some(f), Some(l)) => (f.start, l.end),
+        _ => (0, 0),
+    };
+    let total = if subs.is_empty() {
+        0
+    } else {
+        last.saturating_sub(first)
+    };
+    serde_json::json!({
+        "ok": true,
+        "format": format_to_name(file.format()),
+        "count": subs.len() as u32,
+        "total_duration_ms": total,
+        "first_timestamp": first,
+        "last_timestamp": last,
+    })
+    .to_string()
+}
+
+/// 质量校验。
+///   {"ok":true,"format":"srt","count":N,"issue_count":N,
+///    "issues":["subtitle 0 overlaps..."]}
+///   {"ok":false,"error":"..."}
+#[wasm_bindgen]
+pub fn validate_subtitle(content: &str) -> String {
+    use subtitler::model::SubtitleFormat as _;
+
+    let file = match subtitler::parse_bytes(content.as_bytes()) {
+        Ok(f) => f,
+        Err(e) => {
+            return serde_json::json!({ "ok": false, "error": e.to_string() }).to_string();
+        }
+    };
+    let count = file.subtitles().len() as u32;
+    let issues: Vec<String> = file.validate().iter().map(|i| i.to_string()).collect();
+    let issue_count = issues.len() as u32;
+    serde_json::json!({
+        "ok": true,
+        "format": format_to_name(file.format()),
+        "count": count,
+        "issue_count": issue_count,
+        "issues": issues,
+    })
+    .to_string()
+}
+
+/// 文本规范化(剥离 HTML/ASS 标签)。
+///   {"ok":true,"output":"..."}
+///   {"ok":false,"error":"..."}
+#[wasm_bindgen]
+pub fn normalize_subtitle(content: &str) -> String {
+    use subtitler::model::SubtitleFormat as _;
+
+    let mut file = match subtitler::parse_bytes(content.as_bytes()) {
+        Ok(f) => f,
+        Err(e) => {
+            return serde_json::json!({ "ok": false, "error": e.to_string() }).to_string();
+        }
+    };
+    for sub in file.subtitles_mut() {
+        sub.strip_tags();
+    }
+    serde_json::json!({ "ok": true, "output": file.to_string() }).to_string()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -178,6 +259,75 @@ mod tests {
     #[wasm_bindgen_test]
     fn convert_invalid_content_returns_error() {
         let resp = convert_subtitle("not a subtitle at all", "vtt");
+        let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
+        assert_eq!(v["ok"], false);
+    }
+
+    #[wasm_bindgen_test]
+    fn get_info_subtitle_srt() {
+        let srt = "1\n00:00:01,000 --> 00:00:03,500\nHello\n\n2\n00:00:05,000 --> 00:00:07,000\nWorld\n\n";
+        let resp = get_info_subtitle(srt);
+        let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
+        assert_eq!(v["ok"], true);
+        assert_eq!(v["format"], "srt");
+        assert_eq!(v["count"], 2);
+        assert_eq!(v["total_duration_ms"], 6000);
+        assert_eq!(v["first_timestamp"], 1000);
+        assert_eq!(v["last_timestamp"], 7000);
+    }
+
+    #[wasm_bindgen_test]
+    fn get_info_subtitle_invalid() {
+        let resp = get_info_subtitle("garbage content");
+        let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
+        assert_eq!(v["ok"], false);
+        assert!(v["error"].as_str().unwrap().len() > 0);
+    }
+
+    #[wasm_bindgen_test]
+    fn validate_subtitle_clean() {
+        let srt = "1\n00:00:01,000 --> 00:00:03,500\nHello\n\n2\n00:00:05,000 --> 00:00:07,000\nWorld\n\n";
+        let resp = validate_subtitle(srt);
+        let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
+        assert_eq!(v["ok"], true);
+        assert_eq!(v["count"], 2);
+        assert_eq!(v["issue_count"], 0);
+        assert!(v["issues"].as_array().unwrap().is_empty());
+    }
+
+    #[wasm_bindgen_test]
+    fn validate_subtitle_with_overlap() {
+        let srt = "1\n00:00:01,000 --> 00:00:01,500\nA\n\n2\n00:00:01,200 --> 00:00:03,000\nB\n\n";
+        let resp = validate_subtitle(srt);
+        let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
+        assert_eq!(v["ok"], true);
+        assert!(v["issue_count"].as_u64().unwrap() >= 1);
+        let issues = v["issues"].as_array().unwrap();
+        assert!(!issues.is_empty());
+        assert!(issues.iter().any(|i| i.as_str().unwrap().contains("overlap")));
+    }
+
+    #[wasm_bindgen_test]
+    fn validate_subtitle_invalid() {
+        let resp = validate_subtitle("not a subtitle");
+        let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
+        assert_eq!(v["ok"], false);
+    }
+
+    #[wasm_bindgen_test]
+    fn normalize_subtitle_strips_tags() {
+        let vtt = "WEBVTT\n\n00:00:01,000 --> 00:00:03,500\n<i>Hello</i>\n";
+        let resp = normalize_subtitle(vtt);
+        let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
+        assert_eq!(v["ok"], true);
+        let out = v["output"].as_str().unwrap();
+        assert!(!out.contains("<i>"));
+        assert!(out.contains("Hello"));
+    }
+
+    #[wasm_bindgen_test]
+    fn normalize_subtitle_invalid() {
+        let resp = normalize_subtitle("totally garbage");
         let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
         assert_eq!(v["ok"], false);
     }
