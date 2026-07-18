@@ -119,9 +119,9 @@ jobs:
     # 仅打 tag 时部署(v* 开头的 tag,如 v0.1.0)
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+    # 不声明 environment: github-pages —— 该 environment 的 protection rules
+    # 默认只允许 branch 部署、拒绝 tag。deploy-pages@v4 不强制要求 environment,
+    # 去掉后 tag 部署不再被拦(代价:Actions 页面不再展示部署 URL 链接)。
     steps:
       - uses: actions/checkout@v5
 
