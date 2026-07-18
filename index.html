@@ -4,6 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>字幕格式转换 · Subtitle Converter</title>
+    <script>
+      // 防 FOUC:在 React 加载前同步应用主题
+      (function () {
+        try {
+          var t = localStorage.getItem("subtitle-converter-theme");
+          var dark =
+            t === "dark" ||
+            (!t && window.matchMedia("(prefers-color-scheme: dark)").matches) ||
+            (t === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+          if (dark) document.documentElement.classList.add("dark");
+          document.documentElement.style.colorScheme = dark ? "dark" : "light";
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
