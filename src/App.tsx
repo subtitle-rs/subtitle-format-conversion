@@ -1,45 +1,29 @@
 import { useEffect, useState } from "react";
 import { ensureWasm } from "@/lib/subtitler";
-import { defaultTarget } from "@/lib/formats";
-import { useSubtitleConvert } from "@/hooks/useSubtitleConvert";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { FormatPicker } from "@/components/FormatPicker";
 import { InputPanel } from "@/components/InputPanel";
-import { OutputPanel } from "@/components/OutputPanel";
+import { ToolTabs } from "@/components/ToolTabs";
+import { ConvertTool } from "@/components/tools/ConvertTool";
+import type { ToolId } from "@/types";
 
-function Converter() {
+function Workbench() {
   const [raw, setRaw] = useState("");
-  const [manualSource, setManualSource] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
-  // 临时:active 永远 true(Tab 还没加,Task 7 接入)
-  const { state, setTarget, setSourceFormat } = useSubtitleConvert(raw, true);
-
-  // 源格式变化时,清掉手动源 & 智能选默认目标
-  useEffect(() => {
-    setManualSource(null);
-    setTarget(defaultTarget(state.sourceFormat));
-  }, [state.sourceFormat, setTarget]);
+  const [activeTool, setActiveTool] = useState<ToolId>("convert");
 
   return (
     <div className="flex h-screen flex-col">
       <Header />
-      <FormatPicker
-        sourceFormat={state.sourceFormat}
-        detectError={state.detectError}
-        manualSource={manualSource}
-        target={state.target}
-        onManualSource={(f) => {
-          setManualSource(f);
-          setSourceFormat(f);
-        }}
-        onTarget={setTarget}
-      />
+      <ToolTabs active={activeTool} onChange={setActiveTool} />
       <main className="grid flex-1 grid-cols-1 gap-4 overflow-hidden p-4 md:grid-cols-2">
         <InputPanel value={raw} onChange={setRaw} onFileLoaded={setFileName} />
-        <OutputPanel result={state.result} target={state.target} fileName={fileName} />
+        {activeTool === "convert" && (
+          <ConvertTool raw={raw} fileName={fileName} active={activeTool === "convert"} />
+        )}
+        {/* 其他工具在后续 Task 接入 */}
       </main>
       <Footer />
     </div>
@@ -72,7 +56,7 @@ export default function App() {
             正在加载字幕引擎...
           </div>
         ) : (
-          <Converter />
+          <Workbench />
         )}
       </TooltipProvider>
     </ThemeProvider>
