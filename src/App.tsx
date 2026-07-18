@@ -7,6 +7,9 @@ import { Footer } from "@/components/Footer";
 import { InputPanel } from "@/components/InputPanel";
 import { ToolTabs } from "@/components/ToolTabs";
 import { ConvertTool } from "@/components/tools/ConvertTool";
+import { ValidateTool } from "@/components/tools/ValidateTool";
+import { NormalizeTool } from "@/components/tools/NormalizeTool";
+import { InfoTool } from "@/components/tools/InfoTool";
 import type { ToolId } from "@/types";
 
 function Workbench() {
@@ -23,7 +26,11 @@ function Workbench() {
         {activeTool === "convert" && (
           <ConvertTool raw={raw} fileName={fileName} active={activeTool === "convert"} />
         )}
-        {/* 其他工具在后续 Task 接入 */}
+        {activeTool === "validate" && (
+          <ValidateTool raw={raw} active={activeTool === "validate"} />
+        )}
+        {activeTool === "normalize" && <NormalizeTool raw={raw} />}
+        {activeTool === "info" && <InfoTool raw={raw} active={activeTool === "info"} />}
       </main>
       <Footer />
     </div>
