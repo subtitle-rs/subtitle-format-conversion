@@ -6,17 +6,23 @@ export type ConvertResult =
   | { status: "ok"; output: string; count: number }
   | { status: "error"; message: string };
 
-export interface SubtitleState {
-  raw: string;
+export interface ConvertState {
   sourceFormat: SubtitleFormat | null;
   detectError: boolean; // detect 返回 null
   target: SubtitleFormat;
   result: ConvertResult;
 }
 
-export function useSubtitleConvert(initialTarget: SubtitleFormat = "vtt") {
-  const [state, setState] = useState<SubtitleState>({
-    raw: "",
+/**
+ * 转换 hook。raw 由外部(App)传入并共享。
+ * active 控制是否计算(懒计算:非当前 Tab 时跳过)。
+ */
+export function useSubtitleConvert(
+  raw: string,
+  active: boolean,
+  initialTarget: SubtitleFormat = "vtt"
+) {
+  const [state, setState] = useState<ConvertState>({
     sourceFormat: null,
     detectError: false,
     target: initialTarget,
@@ -24,10 +30,6 @@ export function useSubtitleConvert(initialTarget: SubtitleFormat = "vtt") {
   });
 
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const setRaw = useCallback((raw: string) => {
-    setState((s) => ({ ...s, raw }));
-  }, []);
 
   const setTarget = useCallback((target: SubtitleFormat) => {
     setState((s) => ({ ...s, target }));
@@ -41,7 +43,7 @@ export function useSubtitleConvert(initialTarget: SubtitleFormat = "vtt") {
   useEffect(() => {
     if (timer.current) clearTimeout(timer.current);
 
-    const raw = state.raw;
+    if (!active) return; // 懒计算守卫
     if (!raw.trim()) {
       setState((s) => ({
         ...s,
@@ -76,7 +78,7 @@ export function useSubtitleConvert(initialTarget: SubtitleFormat = "vtt") {
     return () => {
       if (timer.current) clearTimeout(timer.current);
     };
-  }, [state.raw, state.target]);
+  }, [raw, state.target, active]);
 
-  return { state, setRaw, setTarget, setSourceFormat };
+  return { state, setTarget, setSourceFormat };
 }

@@ -11,9 +11,11 @@ import { InputPanel } from "@/components/InputPanel";
 import { OutputPanel } from "@/components/OutputPanel";
 
 function Converter() {
+  const [raw, setRaw] = useState("");
   const [manualSource, setManualSource] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
-  const { state, setRaw, setTarget, setSourceFormat } = useSubtitleConvert();
+  // 临时:active 永远 true(Tab 还没加,Task 7 接入)
+  const { state, setTarget, setSourceFormat } = useSubtitleConvert(raw, true);
 
   // 源格式变化时,清掉手动源 & 智能选默认目标
   useEffect(() => {
@@ -36,7 +38,7 @@ function Converter() {
         onTarget={setTarget}
       />
       <main className="grid flex-1 grid-cols-1 gap-4 overflow-hidden p-4 md:grid-cols-2">
-        <InputPanel value={state.raw} onChange={setRaw} onFileLoaded={setFileName} />
+        <InputPanel value={raw} onChange={setRaw} onFileLoaded={setFileName} />
         <OutputPanel result={state.result} target={state.target} fileName={fileName} />
       </main>
       <Footer />
