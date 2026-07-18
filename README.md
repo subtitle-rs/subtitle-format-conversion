@@ -51,7 +51,12 @@ cd wasm && wasm-pack test --node --lib
 
 ## 部署(GitHub Pages)
 
-CI 通过 GitHub Actions 自动部署。每次推送到 `main` 会:
+部署由 **tag 触发**,不是每次 main push:
+
+- **main push / PR**:只跑 CI 测试(build-wasm + test-wasm + typecheck),不部署
+- **打 tag**(如 `v0.1.0`):跑测试 + 部署到 GitHub Pages
+
+打 tag 部署的流程:
 
 1. 构建 wasm pkg(缓存 Rust 编译产物)
 2. 跑 wasm 单元测试
@@ -60,11 +65,24 @@ CI 通过 GitHub Actions 自动部署。每次推送到 `main` 会:
 
 部署 URL:`https://subtitle-rs.github.io/subtitle-format-conversion/`
 
+### 发版步骤
+
+```bash
+# 1. 确保 main 上的代码已通过 CI
+git checkout main && git pull
+
+# 2. 打 tag(语义化版本)
+git tag v0.1.0
+git push origin v0.1.0
+
+# 3. 到 Actions tab 观察 deploy job,完成后访问部署 URL
+```
+
 ### 首次配置(只需一次)
 
 仓库 **Settings → Pages → Build and deployment → Source** 选择 **"GitHub Actions"**(不是 "Deploy from a branch")。
 
-配置完成后,下次推送到 `main` 即自动部署。PR 会触发 CI 测试但不会部署。
+配置完成后,打 tag 即自动部署。PR 和 main push 只触发测试。
 
 ### `base` 路径说明
 
