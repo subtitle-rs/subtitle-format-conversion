@@ -4,7 +4,12 @@ import wasm from "vite-plugin-wasm";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
+// GitHub Pages 部署在子路径(/subtitle-format-conversion/),需要正确 base。
+// 本地 dev 不设该变量,默认 "/"。CI 构建时注入 BASE_PATH。
+const base = process.env.BASE_PATH || "/";
+
 export default defineConfig({
+  base,
   plugins: [react(), wasm(), tailwindcss()],
   resolve: {
     alias: {

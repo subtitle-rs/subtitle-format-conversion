@@ -9,7 +9,12 @@
     "build": "vite build",
     "build:wasm": "wasm-pack build wasm --target web --out-dir ../pkg",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "verify": "tsc --noEmit && vite build"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=11"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.1.20",

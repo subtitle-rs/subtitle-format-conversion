@@ -1,0 +1,150 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Pages 部署需要这两个权限;PR 上的 deploy job 被 if 过滤掉,不会越权
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时间只跑一个部署,取消旧的
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  # 与仓库名一致,Pages 子路径
+  BASE_PATH: /subtitle-format-conversion/
+
+jobs:
+  # ─────────────────────────────────────────────
+  # 构建 wasm pkg,产物通过 artifact 传给下游 job
+  # ─────────────────────────────────────────────
+  build-wasm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: "wasm -> target"
+
+      - uses: jetli/wasm-pack-action@v0.4.0
+
+      - name: Build wasm pkg
+        run: wasm-pack build wasm --target web --out-dir ../pkg --release
+
+      - name: Smoke check exports
+        run: |
+          grep -E "detect_subtitle|convert_subtitle|supported_formats" pkg/subtitle_converter_wasm.d.ts
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wasm-pkg
+          path: pkg/
+          retention-days: 1
+
+  # ─────────────────────────────────────────────
+  # wasm 单元测试(用源码,与 build-wasm 并行)
+  # ─────────────────────────────────────────────
+  test-wasm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: "wasm -> target"
+
+      - uses: jetli/wasm-pack-action@v0.4.0
+
+      - name: Run wasm tests
+        run: cd wasm && wasm-pack test --node --lib
+
+  # ─────────────────────────────────────────────
+  # 前端类型检查(依赖 build-wasm 的 pkg/ artifact)
+  # ─────────────────────────────────────────────
+  typecheck:
+    needs: build-wasm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: wasm-pkg
+          path: pkg/
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Build (verify production bundle)
+        run: pnpm build
+
+  # ─────────────────────────────────────────────
+  # 部署到 GitHub Pages(仅 main push)
+  # ─────────────────────────────────────────────
+  deploy:
+    needs: [build-wasm, test-wasm, typecheck]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: wasm-pkg
+          path: pkg/
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Build with BASE_PATH
+        run: pnpm build
+        env:
+          BASE_PATH: ${{ env.BASE_PATH }}
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
