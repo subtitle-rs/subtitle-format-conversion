@@ -30,7 +30,7 @@ jobs:
   build-wasm:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -40,7 +40,10 @@ jobs:
         with:
           workspaces: "wasm -> target"
 
-      - uses: jetli/wasm-pack-action@v0.4.0
+      # 直接装 wasm-pack;被 rust-cache 缓存的 cargo bin 目录覆盖,二次运行很快。
+      # 不用 jetli/wasm-pack-action —— 该 action 自 2022 年起未更新,用的 node16 会触发 deprecation 警告。
+      - name: Install wasm-pack
+        run: cargo install wasm-pack --locked
 
       - name: Build wasm pkg
         run: wasm-pack build wasm --target web --out-dir ../pkg --release
@@ -61,7 +64,7 @@ jobs:
   test-wasm:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -71,7 +74,8 @@ jobs:
         with:
           workspaces: "wasm -> target"
 
-      - uses: jetli/wasm-pack-action@v0.4.0
+      - name: Install wasm-pack
+        run: cargo install wasm-pack --locked
 
       - name: Run wasm tests
         run: cd wasm && wasm-pack test --node --lib
@@ -83,16 +87,15 @@ jobs:
     needs: build-wasm
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: actions/download-artifact@v4
         with:
           name: wasm-pkg
           path: pkg/
 
+      # 不传 version —— action-setup@v4 会自动读 package.json 的 packageManager 字段
       - uses: pnpm/action-setup@v4
-        with:
-          version: 11
 
       - uses: actions/setup-node@v4
         with:
@@ -120,7 +123,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: actions/download-artifact@v4
         with:
@@ -128,8 +131,6 @@ jobs:
           path: pkg/
 
       - uses: pnpm/action-setup@v4
-        with:
-          version: 11
 
       - uses: actions/setup-node@v4
         with:
