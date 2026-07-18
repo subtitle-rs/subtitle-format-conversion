@@ -1,15 +1,24 @@
-# 字幕格式转换 · Subtitle Converter
+# 字幕工具台 · Subtitle Workbench
 
-纯客户端的字幕格式转换网页。基于 [subtitler](https://crates.io/crates/subtitler) Rust 库编译为 WebAssembly,100% 在浏览器内运行 —— 文件不离开设备,无后端、无上传。
+> 🌐 **[在线使用 →](https://subtitle-rs.github.io/subtitle-format-conversion/)**
 
-支持 13 种字幕格式互转:SRT · VTT · ASS · SSA · MicroDVD · SubViewer · TTML · SBV · LRC · SAMI · MPL2 · SCC · EBU STL。
+纯客户端的字幕工具台。基于 [subtitler](https://crates.io/crates/subtitler) Rust 库编译为 WebAssembly,100% 在浏览器内运行 —— 文件不离开设备,无后端、无上传。
+
+支持 13 种字幕格式:SRT · VTT · ASS · SSA · MicroDVD · SubViewer · TTML · SBV · LRC · SAMI · MPL2 · SCC · EBU STL。
 
 ## 功能
 
-- 拖拽 / 粘贴上传字幕文件
-- 自动检测源格式
-- 选择目标格式,实时预览转换结果(debounce)
-- 复制到剪贴板 / 下载转换后的文件
+顶部 4 个 Tab,共享一份输入:
+
+- **格式转换** — 13 种格式互转,自动检测源格式,实时预览(debounce),复制 / 下载
+- **质量校验** — 检测重叠、负时长、时间倒序等问题,绿色 / 黄色状态徽章
+- **文本规范化** — 剥离 HTML/ASS 标签(按钮触发,不破坏原文)
+- **字幕信息** — 格式 / 条数 / 总时长 / 首末时间戳,时间戳格式化为 `HH:MM:SS.mmm`
+
+通用:
+
+- 拖拽 / 粘贴上传,所有工具共享同一份输入(切 Tab 不丢内容)
+- 懒计算:只跑当前激活的 Tab,大文件不卡
 - 亮色 / 暗色 / 跟随系统 三态主题
 - 移动端响应式
 
@@ -63,7 +72,7 @@ cd wasm && wasm-pack test --node --lib
 3. typecheck + 生产构建
 4. 部署到 GitHub Pages
 
-部署 URL:`https://subtitle-rs.github.io/subtitle-format-conversion/`
+**线上地址**:<https://subtitle-rs.github.io/subtitle-format-conversion/>
 
 ### 发版步骤
 
