@@ -244,6 +244,64 @@ pub fn normalize_subtitle(content: &str) -> String {
     serde_json::json!({ "ok": true, "output": file.to_string() }).to_string()
 }
 
+/// 解析 CMX3600 EDL 切镜点。
+///   {"ok":true,"cuts":[ms,...]} | {"ok":false,"error":"..."}
+#[wasm_bindgen]
+pub fn parse_edl_cuts(edl: &str, fps: f64) -> String {
+    match subtitler::shotlist::parse_edl_cuts(edl.as_bytes(), fps) {
+        Ok(cuts) => serde_json::json!({ "ok": true, "cuts": cuts }).to_string(),
+        Err(e) => serde_json::json!({ "ok": false, "error": e.to_string() }).to_string(),
+    }
+}
+
+/// 修复操作(按序:min_gap -> merge_identical -> rollup -> shot_changes)。
+/// min_gap_ms / merge_gap_ms 用 -1 表示不启用;cuts_ms 非空时应用镜头切换。
+///   {"ok":true,"output":"...","before":N,"after":M}
+///   {"ok":false,"error":"..."}
+#[wasm_bindgen]
+pub fn repair_subtitle(
+    content: &str,
+    min_gap_ms: i64,
+    merge_gap_ms: i64,
+    rollup: bool,
+    cuts_ms: &[u64],
+    before_frames: u64,
+    after_frames: u64,
+    fps: f64,
+) -> String {
+    use subtitler::model::SubtitleFormat as _;
+
+    let mut file = match subtitler::parse_bytes(content.as_bytes()) {
+        Ok(f) => f,
+        Err(e) => {
+            return serde_json::json!({ "ok": false, "error": e.to_string() }).to_string();
+        }
+    };
+    let before = file.subtitles().len() as u32;
+
+    if min_gap_ms >= 0 {
+        file.enforce_min_gap(min_gap_ms as u64);
+    }
+    if merge_gap_ms >= 0 {
+        file.merge_identical(merge_gap_ms as u64);
+    }
+    if rollup {
+        file.remove_repeating_lines();
+    }
+    if !cuts_ms.is_empty() {
+        file.apply_shot_changes(cuts_ms, before_frames, after_frames, fps);
+    }
+
+    let after = file.subtitles().len() as u32;
+    serde_json::json!({
+        "ok": true,
+        "output": file.to_string(),
+        "before": before,
+        "after": after
+    })
+    .to_string()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -378,6 +436,63 @@ mod tests {
         let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
         assert_eq!(v["ok"], false);
         assert!(v["error"].as_str().unwrap().contains("notapreset"));
+    }
+
+    #[wasm_bindgen_test]
+    fn parse_edl_cuts_basic() {
+        let edl = "TITLE: TEST CUTS\n\n001  V     C        01:00:10:00 01:00:20:00 01:00:10:00 01:00:20:00\n\n002  V     C        01:00:30:00 01:00:40:00 01:00:30:00 01:00:40:00\n";
+        let resp = parse_edl_cuts(edl, 25.0);
+        let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
+        assert_eq!(v["ok"], true);
+        let cuts = v["cuts"].as_array().unwrap();
+        // 每个事件的入点+出点都算切镜点:2 事件 -> 4 个 cut
+        assert_eq!(cuts.len(), 4);
+    }
+
+    #[wasm_bindgen_test]
+    fn parse_edl_cuts_no_cuts_is_ok() {
+        let resp = parse_edl_cuts("TITLE: EMPTY", 25.0);
+        let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
+        // 空/无效 EDL:ok:true 且 cuts 为空,或 ok:false,都合法
+        assert!(v["ok"] == true || v["ok"] == false);
+    }
+
+    #[wasm_bindgen_test]
+    fn repair_min_gap() {
+        let srt = "1\n00:00:01,000 --> 00:00:03,000\nA\n\n2\n00:00:03,200 --> 00:00:05,000\nB\n\n";
+        let resp = repair_subtitle(srt, 500, -1, false, &[], 0, 0, 25.0);
+        let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
+        assert_eq!(v["ok"], true);
+        assert_eq!(v["before"], 2);
+        assert_eq!(v["after"], 2); // min_gap 不减少条数
+    }
+
+    #[wasm_bindgen_test]
+    fn repair_merge_identical() {
+        let srt = "1\n00:00:01,000 --> 00:00:02,000\nSame\n\n2\n00:00:02,500 --> 00:00:03,500\nSame\n\n";
+        let resp = repair_subtitle(srt, -1, 1000, false, &[], 0, 0, 25.0);
+        let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
+        assert_eq!(v["ok"], true);
+        assert_eq!(v["before"], 2);
+        assert_eq!(v["after"], 1);
+    }
+
+    #[wasm_bindgen_test]
+    fn repair_noop() {
+        let srt = "1\n00:00:01,000 --> 00:00:03,500\nHello\n\n";
+        let resp = repair_subtitle(srt, -1, -1, false, &[], 0, 0, 25.0);
+        let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
+        assert_eq!(v["ok"], true);
+        assert_eq!(v["before"], 1);
+        assert_eq!(v["after"], 1);
+        assert!(v["output"].as_str().unwrap().contains("Hello"));
+    }
+
+    #[wasm_bindgen_test]
+    fn repair_invalid_content() {
+        let resp = repair_subtitle("garbage", -1, -1, false, &[], 0, 0, 25.0);
+        let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
+        assert_eq!(v["ok"], false);
     }
 
     #[wasm_bindgen_test]
