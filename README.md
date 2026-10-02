@@ -4,15 +4,16 @@
 
 纯客户端的字幕工具台。基于 [subtitler](https://crates.io/crates/subtitler) Rust 库编译为 WebAssembly,100% 在浏览器内运行 —— 文件不离开设备,无后端、无上传。
 
-支持 13 种字幕格式:SRT · VTT · ASS · SSA · MicroDVD · SubViewer · TTML · SBV · LRC · SAMI · MPL2 · SCC · EBU STL。
+支持 17 种字幕格式:SRT · VTT · ASS · SSA · MicroDVD · Spruce · SubViewer · TTML · DFXP · ITT · Whisper · SBV · LRC · SAMI · MPL2 · SCC · EBU STL。
 
 ## 功能
 
-顶部 4 个 Tab,共享一份输入:
+顶部 5 个 Tab,共享一份输入:
 
-- **格式转换** — 13 种格式互转,自动检测源格式,实时预览(debounce),复制 / 下载
-- **质量校验** — 检测重叠、负时长、时间倒序等问题,绿色 / 黄色状态徽章
+- **格式转换** — 17 种格式互转,自动检测源格式,实时预览(debounce),复制 / 下载
+- **质量校验** — 基础检查(重叠/负时长/倒序)+ 广播级规则集(Netflix / BBC / TED / ARD / Channel 4)
 - **文本规范化** — 剥离 HTML/ASS 标签(按钮触发,不破坏原文)
+- **修复** — 保证最小间隔 / 合并重复文本 / Roll-up 修复 / EDL 镜头切换规则(Netflix 出海)
 - **字幕信息** — 格式 / 条数 / 总时长 / 首末时间戳,时间戳格式化为 `HH:MM:SS.mmm`
 
 通用:
