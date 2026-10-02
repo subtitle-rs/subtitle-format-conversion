@@ -9,6 +9,7 @@ import { ToolTabs } from "@/components/ToolTabs";
 import { ConvertTool } from "@/components/tools/ConvertTool";
 import { ValidateTool } from "@/components/tools/ValidateTool";
 import { NormalizeTool } from "@/components/tools/NormalizeTool";
+import { RepairTool } from "@/components/tools/RepairTool";
 import { InfoTool } from "@/components/tools/InfoTool";
 import type { ToolId } from "@/types";
 
@@ -30,6 +31,7 @@ function Workbench() {
           <ValidateTool raw={raw} active={activeTool === "validate"} />
         )}
         {activeTool === "normalize" && <NormalizeTool raw={raw} />}
+        {activeTool === "repair" && <RepairTool raw={raw} fileName={fileName} />}
         {activeTool === "info" && <InfoTool raw={raw} active={activeTool === "info"} />}
       </main>
       <Footer />
