@@ -1,1 +1,1 @@
-export type ToolId = "convert" | "validate" | "normalize" | "info";
+export type ToolId = "convert" | "validate" | "normalize" | "repair" | "info";
