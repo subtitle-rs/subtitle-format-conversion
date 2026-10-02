@@ -2,10 +2,33 @@ import { CheckCircle2, AlertTriangle, XCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { FORMAT_LABELS } from "@/lib/formats";
+import type { GuidelinePreset } from "@/lib/subtitler";
 import type { ValidateState } from "@/hooks/useValidate";
 
-export function ValidatePanel({ state }: { state: ValidateState }) {
+const PRESETS: { value: GuidelinePreset; label: string }[] = [
+  { value: "basic", label: "基础" },
+  { value: "netflix", label: "Netflix 出海规范" },
+  { value: "bbc", label: "BBC" },
+  { value: "ted", label: "TED" },
+  { value: "ard", label: "ARD/ORF/SRF/ZDF" },
+  { value: "channel4", label: "Channel 4" },
+];
+
+interface Props {
+  state: ValidateState;
+  preset: GuidelinePreset;
+  onPresetChange: (p: GuidelinePreset) => void;
+}
+
+export function ValidatePanel({ state, preset, onPresetChange }: Props) {
   if (state.status === "idle") {
     return (
       <Card className="flex h-full items-center justify-center">
@@ -36,7 +59,21 @@ export function ValidatePanel({ state }: { state: ValidateState }) {
   return (
     <Card className="flex h-full flex-col">
       <CardHeader className="pb-3">
-        <CardTitle className="flex flex-wrap items-center gap-2 text-base">
+        <div className="flex flex-wrap items-center gap-2">
+          <Select value={preset} onValueChange={(v) => onPresetChange(v as GuidelinePreset)}>
+            <SelectTrigger className="w-[190px]">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {PRESETS.map((p) => (
+                <SelectItem key={p.value} value={p.value}>
+                  {p.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        <CardTitle className="mt-2 flex flex-wrap items-center gap-2 text-base">
           {clean ? (
             <CheckCircle2 className="h-5 w-5 text-green-500" />
           ) : (

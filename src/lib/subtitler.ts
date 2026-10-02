@@ -5,6 +5,8 @@ import init, {
   get_info_subtitle,
   validate_subtitle,
   normalize_subtitle,
+  repair_subtitle,
+  parse_edl_cuts,
 } from "@wasm/subtitle_converter_wasm";
 
 export type SubtitleFormat = string;
@@ -70,9 +72,53 @@ export function getInfo(content: string): InfoResponse {
   return JSON.parse(raw) as InfoResponse;
 }
 
-export function validate(content: string): ValidateResponse {
-  const raw = validate_subtitle(content);
+export type GuidelinePreset = "basic" | "netflix" | "bbc" | "ted" | "ard" | "channel4";
+
+export function validate(
+  content: string,
+  guideline: GuidelinePreset = "basic"
+): ValidateResponse {
+  const raw = validate_subtitle(content, guideline);
   return JSON.parse(raw) as ValidateResponse;
+}
+
+export type RepairResponse =
+  | { ok: true; output: string; before: number; after: number }
+  | { ok: false; error: string };
+
+export type EdlCutsResponse =
+  | { ok: true; cuts: number[] }
+  | { ok: false; error: string };
+
+export function repair(
+  content: string,
+  opts: {
+    minGapMs: number; // -1 = off
+    mergeGapMs: number; // -1 = off
+    rollup: boolean;
+    cutsMs: number[];
+    beforeFrames: number;
+    afterFrames: number;
+    fps: number;
+  }
+): RepairResponse {
+  // wasm-bindgen 把 u64 生成为 bigint / BigUint64Array,这里做 number -> bigint 转换
+  const raw = repair_subtitle(
+    content,
+    BigInt(opts.minGapMs),
+    BigInt(opts.mergeGapMs),
+    opts.rollup,
+    new BigUint64Array(opts.cutsMs.map((n) => BigInt(n))),
+    BigInt(opts.beforeFrames),
+    BigInt(opts.afterFrames),
+    opts.fps
+  );
+  return JSON.parse(raw) as RepairResponse;
+}
+
+export function parseEdlCuts(edl: string, fps: number): EdlCutsResponse {
+  const raw = parse_edl_cuts(edl, fps);
+  return JSON.parse(raw) as EdlCutsResponse;
 }
 
 export function normalize(content: string): NormalizeResponse {

@@ -12,6 +12,10 @@ export const FORMAT_EXTENSIONS: Record<string, string> = {
   mpl2: "mpl",
   scc: "scc",
   ebu_stl: "stl",
+  spruce: "spruce",
+  itt: "itt",
+  dfxp: "dfxp",
+  whisper: "json",
 };
 
 export const FORMAT_LABELS: Record<string, string> = {
@@ -28,6 +32,10 @@ export const FORMAT_LABELS: Record<string, string> = {
   mpl2: "MPL2",
   scc: "SCC (广播)",
   ebu_stl: "EBU STL (广播)",
+  spruce: "Spruce STL",
+  itt: "iTunes TT (ITT)",
+  dfxp: "DFXP",
+  whisper: "Whisper JSON",
 };
 
 // 与 wasm supported_formats() 一致;硬编码作 fallback,wasm 加载后会被覆盖
