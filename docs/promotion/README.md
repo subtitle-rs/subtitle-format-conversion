@@ -25,7 +25,7 @@
 - **角度**:痛点切入(装软件烦、上传怕、跨平台难),给出解决方案
 - **卖点**:免费、不上传、跨平台、13 格式、4 工具
 - **目标**:吸引效率工具爱好者,建立产品认知
-- **配图建议**:工具截图(4 个 Tab 各一张)、格式支持列表、对比表
+- **配图建议**:工具截图(5 个 Tab 各一张)、格式支持列表、对比表
 
 ### V2EX(分享创造)
 - **角度**:[分享创造] 节点,简洁直白,留出讨论空间
@@ -65,9 +65,10 @@
 
 所有文章用到的核心数据:
 
-- **13 种格式**:SRT · VTT · ASS · SSA · MicroDVD · SubViewer · TTML · SBV · LRC · SAMI · MPL2 · SCC · EBU STL
+- **17 种格式**:SRT · VTT · ASS · SSA · MicroDVD · Spruce · SubViewer · TTML · DFXP · ITT · Whisper · SBV · LRC · SAMI · MPL2 · SCC · EBU STL
+- **5 个工具**:格式转换 / 质量校验(含 Netflix/BBC/TED/ARD/C4 广播级规则集) / 文本规范化 / 自动修复(含 EDL 镜头切换) / 字幕信息
 - **4 个工具**:格式转换 / 质量校验 / 文本规范化 / 字幕信息
-- **体积**:wasm 584KB gz / JS 119KB gz / CSS 8KB gz
+- **体积**:wasm 622KB gz / JS 132KB gz / CSS 8KB gz
 - **技术栈**:Rust + wasm-pack + React 19 + TS + Vite 8 + Tailwind v4 + shadcn/ui
 - **底层库**:subtitler 2.6.1(<https://crates.io/crates/subtitler>)
 - **开源**:<https://github.com/subtitle-rs/subtitle-format-conversion>

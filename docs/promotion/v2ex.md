@@ -1,22 +1,23 @@
-# [分享创造] 做了个字幕工具台,纯客户端,13 种格式互转,文件不上传
+# [分享创造] 做了个字幕工具台,纯客户端,17 种格式互转,文件不上传
 
 **地址**:<https://subtitle-rs.github.io/subtitle-format-conversion/>
 **源码**:<https://github.com/subtitle-rs/subtitle-format-conversion>
 
 ## 是什么
 
-一个纯网页字幕工具,打开即用,无需注册。4 个功能:
+一个纯网页字幕工具,打开即用,无需注册。5 个功能:
 
-- **格式转换**:13 种格式互转(SRT / VTT / ASS / SSA / MicroDVD / SubViewer / TTML / SBV / LRC / SAMI / MPL2 / SCC / EBU STL)
-- **质量校验**:检测时间轴重叠、负时长、倒序
+- **格式转换**:17 种格式互转(SRT / VTT / ASS / SSA / MicroDVD / Spruce / SubViewer / TTML / DFXP / ITT / Whisper / SBV / LRC / SAMI / MPL2 / SCC / EBU STL)
+- **质量校验**:基础检查(重叠/负时长/倒序)+ 广播级规则集(Netflix / BBC / TED / ARD / Channel 4,查行长/行数/时长/间隔/阅读速度)
 - **文本规范化**:剥离 HTML/ASS 标签,保留纯文本
+- **修复**:保证最小间隔 / 合并重复文本 / Roll-up 修复 / EDL 镜头切换规则(Netflix 出海)
 - **字幕信息**:格式 / 条数 / 总时长 / 时间戳
 
 ## 两个卖点
 
 **1. 文件不上传。** 所有处理在浏览器里通过 WebAssembly 完成,字幕内容不离开你的设备。这也是为什么它能一直免费——根本没后端。
 
-**2. 复用了成熟的 Rust 库。** 底层是 [subtitler](https://crates.io/crates/subtitler)(Rust 实现的字幕处理库,15 种格式,216 测试),编译成 WASM。所以这个网页的 Rust 代码只有 ~150 行(薄包装层),却支持 13 种格式——因为解析逻辑都来自已有库。
+**2. 复用了成熟的 Rust 库。** 底层是 [subtitler](https://crates.io/crates/subtitler)(Rust 实现的字幕处理库,17 种格式,几百个测试),编译成 WASM。所以这个网页的 Rust 代码只有 ~300 行(薄包装层),却支持 17 种格式和广播级校验——因为解析逻辑都来自已有库。
 
 ## 技术栈
 
@@ -33,7 +34,7 @@
 
 ## 体积
 
-gzip 后 wasm 584KB(13 格式含 SCC/EBU STL 这种二进制广播格式)、JS 119KB、CSS 8KB。
+gzip 后 wasm 622KB(17 格式含 SCC/EBU STL 这种二进制广播格式)、JS 132KB、CSS 8KB。
 
 ## 寻求反馈
 

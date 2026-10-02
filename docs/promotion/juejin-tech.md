@@ -7,7 +7,7 @@
 
 ## 一、先说结论
 
-我做了一个字幕工具台,支持 13 种主流字幕格式的互转、质量校验、文本规范化、元信息查看。整个应用**没有后端**,字幕文件全程在浏览器里通过 WebAssembly 处理——**不上传、不落地、零运维、免费托管**。
+我做了一个字幕工具台,支持 17 种主流字幕格式的互转、广播级质量校验、文本规范化、自动修复、元信息查看。整个应用**没有后端**,字幕文件全程在浏览器里通过 WebAssembly 处理——**不上传、不落地、零运维、免费托管**。
 
 技术栈:
 
@@ -22,7 +22,7 @@
 
 字幕处理听起来简单,实际是个坑非常多的领域:
 
-1. **格式碎片化严重**:SRT / VTT / ASS / SSA / MicroDVD / SubViewer / TTML / SBV / LRC / SAMI / MPL2 / SCC / EBU STL……每种格式的时间戳语法、结构、样式表达都不一样。EBU STL 甚至是个二进制格式。
+1. **格式碎片化严重**:SRT / VTT / ASS / SSA / MicroDVD / Spruce / SubViewer / TTML / DFXP / ITT / Whisper / SBV / LRC / SAMI / MPL2 / SCC / EBU STL……每种格式的时间戳语法、结构、样式表达都不一样。EBU STL 甚至是个二进制格式。
 2. **细节多**:时间戳解析要处理逗号/点分隔符、帧率换算、Cue 间隔、嵌套样式标签、编码检测(UTF-8/GBK/Shift-JIS)……
 3. **已有 Rust 实现成熟**:[subtitler](https://crates.io/crates/subtitler) 已经把这些全做完了,216 个测试用例,生产级。
 
@@ -103,11 +103,11 @@ export type ConvertResponse =
 
 **铁律:wasm-bindgen 函数永不 panic。** 任何错误都走 `Result` 分支返回结构化 JSON,而不是触发 Rust panic(panic 在 wasm 里会变成难处理的 JS 异常)。靠全 `match` 而非 `unwrap()` 保证。
 
-## 四、关键工程决策:四个工具共享一份输入
+## 四、关键工程决策:五个工具共享一份输入
 
-工具台有 4 个 Tab:格式转换、质量校验、文本规范化、字幕信息。每个工具都吃同一份字幕输入。
+工具台有 5 个 Tab:格式转换、质量校验、文本规范化、修复、字幕信息。每个工具都吃同一份字幕输入。
 
-这里有个数据流的关键设计:**`raw` 提升到 App 层,四个工具的 hook 共享**。
+这里有个数据流的关键设计:**`raw` 提升到 App 层,所有工具的 hook 共享**。
 
 ```
 [上传文件 / 粘贴文本] (任意工具的左栏)
@@ -186,13 +186,53 @@ strip = true
 
 | 资源 | 原始 | gzip |
 |------|------|------|
-| wasm | 1.4 MB | **584 KB** |
-| JS | 386 KB | **119 KB** |
-| CSS | 43 KB | **7.9 KB** |
+| wasm | 1.5 MB | **622 KB** |
+| JS | 421 KB | **132 KB** |
+| CSS | 44 KB | **8.0 KB** |
 
-584KB gzipped 不算小,但这是 13 种格式(含 SCC/EBU STL 这种广播级二进制格式)的完整引擎。如果是纯 SRT/VTT,能压到 250KB 以下。
+622KB gzipped 不算小,但这是 17 种格式(含 SCC/EBU STL 这种广播级二进制格式)的完整引擎。如果是纯 SRT/VTT,能压到 250KB 以下。
 
-## 六、CI / CD:tag 触发部署
+## 六、复用库的进化:广播级校验与自动修复
+
+这个项目最大的红利是**底层库在持续进化**。subtitler 从 2.6 升到 2.8 后,我只写了约 150 行包装代码,就白得了两块重功能:
+
+### 广播级校验预设
+
+subtitler 2.7 内置了 Netflix / BBC / TED / ARD-ORF-SRF-ZDF / Channel 4 五大机构的官方风格规则(逐行长度、行数、时长上下限、最小间隔、阅读速度)。包装层只是给 `validate_subtitle` 加了个 guideline 参数:
+
+```rust
+let issues: Vec<String> = match guideline.to_lowercase().as_str() {
+    "basic" | "" => file.validate().iter().map(|i| i.to_string()).collect(),
+    "netflix" => file.validate_guideline(&GuidelinePreset::Netflix.guideline())
+        .iter().map(|i| i.to_string()).collect(),
+    // bbc / ted / ard / channel4 同理...
+};
+```
+
+前端就是一个下拉框切 preset,debounce 重跑——架构上零新概念。
+
+### 修复操作 + EDL 镜头切换
+
+2.7/2.8 还加了三个修复操作(`enforce_min_gap` 保最小间隔、`merge_identical` 合并重复文本、`remove_repeating_lines` 修复 roll-up 字幕)和镜头切换规则(解析 CMX3600 EDL 剪辑单,字幕自动避开切镜点——Netflix 出海验收的硬要求)。
+
+包装成一个 `repair_subtitle` 函数,按序链式应用,参数用 `-1` 表示不启用(wasm-bindgen 传 optional 不便,i64 哨兵值最简单):
+
+```rust
+#[wasm_bindgen]
+pub fn repair_subtitle(content: &str, min_gap_ms: i64, merge_gap_ms: i64,
+                       rollup: bool, cuts_ms: &[u64],
+                       before_frames: u64, after_frames: u64, fps: f64) -> String
+```
+
+这里踩了个 wasm-bindgen 的坑:**`u64` 参数生成的 TS 类型是 `bigint`,`&[u64]` 是 `BigUint64Array`**,TS 侧要显式 `BigInt()` 转换,否则运行时报 `expected a bigint argument`。
+
+UI 上修复 Tab 与规范化同模式:**按钮触发**(破坏性操作不自动跑),显示「10 条 → 7 条」的效果反馈,结果不回写输入栏(输入不可变原则,可反复调参重试)。
+
+### 一个设计决策:转换和校验解耦
+
+有同事问过:为什么不把 guideline 校验加进转换流程,不合规就拒绝转换?因为**转换的目标是格式正确,不是内容合规**——行太长的 SRT 转成 VTT 依然是合法的 VTT。规范问题由校验 Tab 报告,修不修由用户决定。职责分离比「严格」重要。
+
+## 七、CI / CD:tag 触发部署
 
 部署用 GitHub Actions,4 个 job:
 
@@ -214,13 +254,13 @@ build-wasm (构建 pkg,upload-artifact)
 2. **`jetli/wasm-pack-action` 已停更**(2022 年起没更新),触发 Node 20 deprecation。改用 `cargo install wasm-pack --locked`,被 rust-cache 缓存后也不慢。
 3. **GitHub Pages environment 默认拒绝 tag 部署**——UI 里只能选 branch。解决:workflow 里去掉 `environment: github-pages` 声明,`deploy-pages@v4` 不强制要求它。
 
-## 七、踩过的 Rust 坑
+## 八、踩过的 Rust 坑
 
 1. **feature 门控的枚举 variant 不存在**:`Format::Dfxp` / `Format::Whisper` 在没启用对应 feature 时根本不存在,match 分支要删掉(不是 `#[cfg]` 门控分支,是整个 variant 不存在)。
 2. **trait 方法需要 use**:`SubtitleFile::format()` 和 `to_string()` 是 trait `SubtitleFormat` 的方法,必须 `use subtitler::model::SubtitleFormat as _;` 才能调用。报错信息会提示,但容易忽略。
 3. **`wasm-opt` 在某些 toolchain 组合下校验失败**——禁用即可(`wasm-opt = false`),release profile 已经做了优化。
 
-## 八、总结
+## 九、总结
 
 这个项目的核心思路其实很简单:**「成熟的 Rust 库 + WASM + React」是个被低估的组合**。
 
