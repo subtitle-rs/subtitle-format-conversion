@@ -102,14 +102,15 @@ export function repair(
     fps: number;
   }
 ): RepairResponse {
+  // wasm-bindgen 把 u64 生成为 bigint / BigUint64Array,这里做 number -> bigint 转换
   const raw = repair_subtitle(
     content,
-    opts.minGapMs,
-    opts.mergeGapMs,
+    BigInt(opts.minGapMs),
+    BigInt(opts.mergeGapMs),
     opts.rollup,
-    opts.cutsMs,
-    opts.beforeFrames,
-    opts.afterFrames,
+    new BigUint64Array(opts.cutsMs.map((n) => BigInt(n))),
+    BigInt(opts.beforeFrames),
+    BigInt(opts.afterFrames),
     opts.fps
   );
   return JSON.parse(raw) as RepairResponse;
