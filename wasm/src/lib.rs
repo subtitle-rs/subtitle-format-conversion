@@ -162,12 +162,13 @@ pub fn get_info_subtitle(content: &str) -> String {
     .to_string()
 }
 
-/// 质量校验。
+/// 质量校验。guideline: "basic"|"netflix"|"bbc"|"ted"|"ard"|"channel4"
 ///   {"ok":true,"format":"srt","count":N,"issue_count":N,
 ///    "issues":["subtitle 0 overlaps..."]}
 ///   {"ok":false,"error":"..."}
 #[wasm_bindgen]
-pub fn validate_subtitle(content: &str) -> String {
+pub fn validate_subtitle(content: &str, guideline: &str) -> String {
+    use subtitler::guidelines::GuidelinePreset;
     use subtitler::model::SubtitleFormat as _;
 
     let file = match subtitler::parse_bytes(content.as_bytes()) {
@@ -177,7 +178,42 @@ pub fn validate_subtitle(content: &str) -> String {
         }
     };
     let count = file.subtitles().len() as u32;
-    let issues: Vec<String> = file.validate().iter().map(|i| i.to_string()).collect();
+
+    let issues: Vec<String> = match guideline.to_lowercase().as_str() {
+        "basic" | "" => file.validate().iter().map(|i| i.to_string()).collect(),
+        "netflix" => file
+            .validate_guideline(&GuidelinePreset::Netflix.guideline())
+            .iter()
+            .map(|i| i.to_string())
+            .collect(),
+        "bbc" => file
+            .validate_guideline(&GuidelinePreset::Bbc.guideline())
+            .iter()
+            .map(|i| i.to_string())
+            .collect(),
+        "ted" => file
+            .validate_guideline(&GuidelinePreset::Ted.guideline())
+            .iter()
+            .map(|i| i.to_string())
+            .collect(),
+        "ard" => file
+            .validate_guideline(&GuidelinePreset::ArdOrfSrfZdf.guideline())
+            .iter()
+            .map(|i| i.to_string())
+            .collect(),
+        "channel4" => file
+            .validate_guideline(&GuidelinePreset::Channel4.guideline())
+            .iter()
+            .map(|i| i.to_string())
+            .collect(),
+        other => {
+            return serde_json::json!({
+                "ok": false,
+                "error": format!("Unknown guideline preset: {}", other)
+            })
+            .to_string();
+        }
+    };
     let issue_count = issues.len() as u32;
     serde_json::json!({
         "ok": true,
@@ -299,7 +335,7 @@ mod tests {
     #[wasm_bindgen_test]
     fn validate_subtitle_clean() {
         let srt = "1\n00:00:01,000 --> 00:00:03,500\nHello\n\n2\n00:00:05,000 --> 00:00:07,000\nWorld\n\n";
-        let resp = validate_subtitle(srt);
+        let resp = validate_subtitle(srt, "basic");
         let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
         assert_eq!(v["ok"], true);
         assert_eq!(v["count"], 2);
@@ -310,7 +346,7 @@ mod tests {
     #[wasm_bindgen_test]
     fn validate_subtitle_with_overlap() {
         let srt = "1\n00:00:01,000 --> 00:00:01,500\nA\n\n2\n00:00:01,200 --> 00:00:03,000\nB\n\n";
-        let resp = validate_subtitle(srt);
+        let resp = validate_subtitle(srt, "basic");
         let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
         assert_eq!(v["ok"], true);
         assert!(v["issue_count"].as_u64().unwrap() >= 1);
@@ -321,9 +357,27 @@ mod tests {
 
     #[wasm_bindgen_test]
     fn validate_subtitle_invalid() {
-        let resp = validate_subtitle("not a subtitle");
+        let resp = validate_subtitle("not a subtitle", "basic");
         let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
         assert_eq!(v["ok"], false);
+    }
+
+    #[wasm_bindgen_test]
+    fn validate_subtitle_netflix_preset() {
+        let long_line = "1\n00:00:01,000 --> 00:00:04,000\nThis subtitle line is way way way too long for the Netflix guideline limit of forty-two characters\n\n";
+        let resp = validate_subtitle(long_line, "netflix");
+        let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
+        assert_eq!(v["ok"], true);
+        assert!(v["issue_count"].as_u64().unwrap() >= 1);
+    }
+
+    #[wasm_bindgen_test]
+    fn validate_subtitle_invalid_guideline() {
+        let srt = "1\n00:00:01,000 --> 00:00:03,500\nHello\n\n";
+        let resp = validate_subtitle(srt, "notapreset");
+        let v: serde_json::Value = serde_json::from_str(&resp).unwrap();
+        assert_eq!(v["ok"], false);
+        assert!(v["error"].as_str().unwrap().contains("notapreset"));
     }
 
     #[wasm_bindgen_test]
