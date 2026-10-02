@@ -17,6 +17,10 @@ pub(crate) fn format_from_name(name: &str) -> Option<Format> {
         "mpl2" => Some(Format::Mpl2),
         "scc" => Some(Format::Scc),
         "ebu_stl" => Some(Format::EbuStl),
+        "spruce" => Some(Format::Spruce),
+        "itt" => Some(Format::Itt),
+        "dfxp" => Some(Format::Dfxp),
+        "whisper" => Some(Format::Whisper),
         _ => None,
     }
 }
@@ -37,6 +41,10 @@ pub(crate) fn format_to_name(fmt: Format) -> &'static str {
         Format::Mpl2 => "mpl2",
         Format::Scc => "scc",
         Format::EbuStl => "ebu_stl",
+        Format::Spruce => "spruce",
+        Format::Itt => "itt",
+        Format::Dfxp => "dfxp",
+        Format::Whisper => "whisper",
     }
 }
 
@@ -49,8 +57,12 @@ pub fn supported_formats() -> String {
         "ass",
         "ssa",
         "microdvd",
+        "spruce",
         "subviewer",
         "ttml",
+        "dfxp",
+        "itt",
+        "whisper",
         "sbv",
         "lrc",
         "sami",
