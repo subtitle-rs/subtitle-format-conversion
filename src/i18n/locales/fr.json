@@ -1,0 +1,126 @@
+{
+  "app": {
+    "name": "Atelier de sous-titres",
+    "title": "Atelier de sous-titres — convertisseur de sous-titres en ligne gratuit"
+  },
+  "nav": {
+    "convert": "Convertir",
+    "validate": "Vérifier",
+    "normalize": "Normaliser",
+    "repair": "Réparer",
+    "info": "Infos"
+  },
+  "common": {
+    "copy": "Copier",
+    "copied": "Copié",
+    "download": "Télécharger",
+    "count_subtitles": "{{count}} sous-titres",
+    "issue_count": "{{count}} problèmes",
+    "local_badge": "Traitement local",
+    "local_tooltip": "Les fichiers ne quittent jamais votre navigateur — aucun envoi",
+    "loading_engine": "Chargement du moteur de sous-titres...",
+    "engine_error": "Échec du chargement du moteur",
+    "retry_reload": "Recharger",
+    "char_count": "{{count}} caractères",
+    "large_file_warn": "Fichier volumineux — l'affichage peut ralentir"
+  },
+  "tool": {
+    "input": {
+      "title": "Entrée",
+      "tab_upload": "Importer un fichier",
+      "tab_paste": "Coller du texte",
+      "drop_hint": "Glissez un fichier de sous-titres ici, ou cliquez pour choisir",
+      "drop_formats": "Formats pris en charge : .srt / .vtt / .ass / .sub / .ttml et plus",
+      "paste_placeholder": "Collez le contenu des sous-titres..."
+    },
+    "convert": {
+      "source": "Source",
+      "target": "Cible",
+      "undetected_select": "Non reconnu — choisissez",
+      "result_title": "Résultat · {{format}}",
+      "placeholder": "Le résultat de la conversion apparaîtra ici",
+      "failed": "Échec de la conversion"
+    },
+    "validate": {
+      "placeholder": "Les résultats de vérification apparaîtront ici",
+      "failed": "Échec de la vérification",
+      "no_issues": "Aucun problème détecté"
+    },
+    "normalize": {
+      "title": "Normalisation du texte",
+      "strip_tags": "Supprimer les balises HTML/ASS",
+      "run": "Normaliser",
+      "placeholder": "Cliquez sur « Normaliser » pour traiter les sous-titres",
+      "failed": "Échec de la normalisation :"
+    },
+    "repair": {
+      "title": "Réparer les sous-titres",
+      "min_gap": "Imposer un intervalle minimum",
+      "merge_dup": "Fusionner les doublons, écart ≤",
+      "rollup": "Réparation roll-up (fusionner les lignes identiques adjacentes)",
+      "edl_title": "Règles de coupes (livraison Netflix)",
+      "edl_pick": "Choisir un EDL",
+      "edl_loaded": "{{name}} · {{count}} coupes",
+      "edl_failed": "Échec de l'analyse EDL :",
+      "fps": "Fréquence d'images",
+      "before_frames": "Marge avant",
+      "after_frames_sep": "images · marge après",
+      "frames": "images",
+      "run": "Appliquer les réparations",
+      "placeholder": "Choisissez les réparations, puis cliquez sur « Appliquer »",
+      "failed": "Échec de la réparation :",
+      "count_change": "{{before}} → {{after}} sous-titres"
+    },
+    "info": {
+      "title": "Infos sous-titres",
+      "placeholder": "Les informations apparaîtront ici",
+      "failed": "Impossible d'analyser les sous-titres :",
+      "row_format": "Format",
+      "row_count": "Nombre de sous-titres",
+      "row_duration": "Durée totale",
+      "row_first": "Premier horodatage",
+      "row_last": "Dernier horodatage"
+    }
+  },
+  "format": {
+    "srt": "SubRip (SRT)",
+    "vtt": "WebVTT (VTT)",
+    "ass": "Advanced SubStation (ASS)",
+    "ssa": "SubStation Alpha (SSA)",
+    "microdvd": "MicroDVD",
+    "spruce": "Spruce STL",
+    "subviewer": "SubViewer",
+    "ttml": "TTML / IMSC",
+    "dfxp": "DFXP",
+    "itt": "iTunes TT (ITT)",
+    "whisper": "Whisper JSON",
+    "sbv": "YouTube SBV",
+    "lrc": "Paroles LRC",
+    "sami": "SAMI",
+    "mpl2": "MPL2",
+    "scc": "SCC (diffusion)",
+    "ebu_stl": "EBU STL (diffusion)"
+  },
+  "guideline": {
+    "basic": "Basique",
+    "netflix": "Spécifications Netflix",
+    "bbc": "BBC",
+    "ted": "TED",
+    "ard": "ARD/ORF/SRF/ZDF",
+    "channel4": "Channel 4"
+  },
+  "footer": {
+    "supported": "Formats pris en charge :",
+    "based_on_prefix": "Construit sur la bibliothèque",
+    "based_on_suffix": "Rust · compilé en WebAssembly · fonctionne à 100 % dans votre navigateur"
+  },
+  "theme": {
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système",
+    "toggle_title": "Changer de thème"
+  },
+  "lang": {
+    "switch": "Changer de langue"
+  }
+}

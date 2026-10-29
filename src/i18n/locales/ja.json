@@ -1,0 +1,126 @@
+{
+  "app": {
+    "name": "字幕ツール",
+    "title": "字幕ツール — 無料オンライン字幕変換"
+  },
+  "nav": {
+    "convert": "形式変換",
+    "validate": "品質チェック",
+    "normalize": "テキスト正規化",
+    "repair": "修復",
+    "info": "字幕情報"
+  },
+  "common": {
+    "copy": "コピー",
+    "copied": "コピーしました",
+    "download": "ダウンロード",
+    "count_subtitles": "{{count}} 件の字幕",
+    "issue_count": "{{count}} 件の問題",
+    "local_badge": "ローカル処理",
+    "local_tooltip": "ファイルはブラウザーから出ません。アップロード不要",
+    "loading_engine": "字幕エンジンを読み込み中...",
+    "engine_error": "エンジンの読み込みに失敗しました",
+    "retry_reload": "再読み込み",
+    "char_count": "{{count}} 文字",
+    "large_file_warn": "ファイルが大きいため、表示が遅くなる可能性があります"
+  },
+  "tool": {
+    "input": {
+      "title": "入力",
+      "tab_upload": "ファイルをアップロード",
+      "tab_paste": "テキストを貼り付け",
+      "drop_hint": "字幕ファイルをここにドラッグ、またはクリックして選択",
+      "drop_formats": ".srt / .vtt / .ass / .sub / .ttml などに対応",
+      "paste_placeholder": "字幕の内容を貼り付け..."
+    },
+    "convert": {
+      "source": "入力形式",
+      "target": "出力形式",
+      "undetected_select": "認識できません — 選択してください",
+      "result_title": "変換結果 · {{format}}",
+      "placeholder": "字幕を入力すると、変換結果がここに表示されます",
+      "failed": "変換に失敗しました"
+    },
+    "validate": {
+      "placeholder": "字幕を入力すると、チェック結果がここに表示されます",
+      "failed": "チェックに失敗しました",
+      "no_issues": "問題は見つかりませんでした"
+    },
+    "normalize": {
+      "title": "テキスト正規化",
+      "strip_tags": "HTML/ASS タグを除去",
+      "run": "正規化",
+      "placeholder": "「正規化」をクリックして処理します",
+      "failed": "正規化に失敗しました:"
+    },
+    "repair": {
+      "title": "字幕の修復",
+      "min_gap": "最小間隔を確保",
+      "merge_dup": "重複行を結合、間隔 ≤",
+      "rollup": "ロールアップ修復(隣接する同一行を結合)",
+      "edl_title": "カット切り替えルール(Netflix 納品)",
+      "edl_pick": "EDL を選択",
+      "edl_loaded": "{{name}} · カット {{count}} 件",
+      "edl_failed": "EDL の解析に失敗:",
+      "fps": "フレームレート",
+      "before_frames": "カット前",
+      "after_frames_sep": "フレーム確保 · カット後",
+      "frames": "フレーム確保",
+      "run": "修復を適用",
+      "placeholder": "修復項目を選んで「修復を適用」をクリック",
+      "failed": "修復に失敗しました:",
+      "count_change": "字幕 {{before}} 件 → {{after}} 件"
+    },
+    "info": {
+      "title": "字幕情報",
+      "placeholder": "字幕を入力すると、情報がここに表示されます",
+      "failed": "字幕を解析できません:",
+      "row_format": "形式",
+      "row_count": "字幕件数",
+      "row_duration": "総時間",
+      "row_first": "最初のタイムスタンプ",
+      "row_last": "最後のタイムスタンプ"
+    }
+  },
+  "format": {
+    "srt": "SubRip (SRT)",
+    "vtt": "WebVTT (VTT)",
+    "ass": "Advanced SubStation (ASS)",
+    "ssa": "SubStation Alpha (SSA)",
+    "microdvd": "MicroDVD",
+    "spruce": "Spruce STL",
+    "subviewer": "SubViewer",
+    "ttml": "TTML / IMSC",
+    "dfxp": "DFXP",
+    "itt": "iTunes TT (ITT)",
+    "whisper": "Whisper JSON",
+    "sbv": "YouTube SBV",
+    "lrc": "LRC 歌詞",
+    "sami": "SAMI",
+    "mpl2": "MPL2",
+    "scc": "SCC (放送)",
+    "ebu_stl": "EBU STL (放送)"
+  },
+  "guideline": {
+    "basic": "基本",
+    "netflix": "Netflix 納品仕様",
+    "bbc": "BBC",
+    "ted": "TED",
+    "ard": "ARD/ORF/SRF/ZDF",
+    "channel4": "Channel 4"
+  },
+  "footer": {
+    "supported": "対応フォーマット:",
+    "based_on_prefix": "基盤:",
+    "based_on_suffix": "Rust ライブラリ · WebAssembly にコンパイル · 100% ブラウザー内で動作"
+  },
+  "theme": {
+    "light": "ライト",
+    "dark": "ダーク",
+    "system": "システムに従う",
+    "toggle_title": "テーマを切り替え"
+  },
+  "lang": {
+    "switch": "言語を切り替え"
+  }
+}

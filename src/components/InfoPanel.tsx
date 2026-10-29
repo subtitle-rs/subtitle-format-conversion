@@ -1,6 +1,6 @@
+import { useTranslation } from "react-i18next";
 import { Info as InfoIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FORMAT_LABELS } from "@/lib/formats";
 import type { InfoState } from "@/hooks/useInfo";
 
 /** 毫秒 → HH:MM:SS.mmm */
@@ -24,11 +24,13 @@ function Row({ label, value }: { label: string; value: string }) {
 }
 
 export function InfoPanel({ state }: { state: InfoState }) {
+  const { t } = useTranslation();
+
   if (state.status === "idle") {
     return (
       <Card className="flex h-full items-center justify-center">
         <CardContent className="text-sm text-muted-foreground">
-          输入字幕后,字幕信息将显示在此
+          {t("tool.info.placeholder")}
         </CardContent>
       </Card>
     );
@@ -38,7 +40,7 @@ export function InfoPanel({ state }: { state: InfoState }) {
     return (
       <Card className="flex h-full items-center justify-center">
         <CardContent className="text-sm text-destructive">
-          无法解析字幕:{state.message}
+          {t("tool.info.failed")} {state.message}
         </CardContent>
       </Card>
     );
@@ -51,16 +53,16 @@ export function InfoPanel({ state }: { state: InfoState }) {
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2 text-base">
           <InfoIcon className="h-5 w-5" />
-          字幕信息
+          {t("tool.info.title")}
         </CardTitle>
       </CardHeader>
       <CardContent className="flex-1">
         <div className="mx-auto max-w-md">
-          <Row label="格式" value={FORMAT_LABELS[format] ?? format} />
-          <Row label="字幕条数" value={String(count)} />
-          <Row label="总时长" value={fmtMs(total_duration_ms)} />
-          <Row label="首时间戳" value={fmtMs(first_timestamp)} />
-          <Row label="末时间戳" value={fmtMs(last_timestamp)} />
+          <Row label={t("tool.info.row_format")} value={t(`format.${format}`)} />
+          <Row label={t("tool.info.row_count")} value={String(count)} />
+          <Row label={t("tool.info.row_duration")} value={fmtMs(total_duration_ms)} />
+          <Row label={t("tool.info.row_first")} value={fmtMs(first_timestamp)} />
+          <Row label={t("tool.info.row_last")} value={fmtMs(last_timestamp)} />
         </div>
       </CardContent>
     </Card>

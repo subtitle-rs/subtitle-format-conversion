@@ -1,0 +1,126 @@
+{
+  "app": {
+    "name": "סדנת כתוביות",
+    "title": "סדנת כתוביות — ממיר כתוביות מקוון חינמי"
+  },
+  "nav": {
+    "convert": "המרה",
+    "validate": "בדיקה",
+    "normalize": "ניקוי",
+    "repair": "תיקון",
+    "info": "מידע"
+  },
+  "common": {
+    "copy": "העתקה",
+    "copied": "הועתק",
+    "download": "הורדה",
+    "count_subtitles": "{{count}} שורות כתוביות",
+    "issue_count": "{{count}} בעיות",
+    "local_badge": "עיבוד מקומי",
+    "local_tooltip": "הקבצים לעולם לא עוזבים את הדפדפן — שום דבר לא נשלח לשרת",
+    "loading_engine": "טוען את מנוע הכתוביות...",
+    "engine_error": "טעינת המנוע נכשלה",
+    "retry_reload": "טעינה מחדש",
+    "char_count": "{{count}} תווים",
+    "large_file_warn": "קובץ גדול — התצוגה עלולה להיות איטית"
+  },
+  "tool": {
+    "input": {
+      "title": "קלט",
+      "tab_upload": "העלאת קובץ",
+      "tab_paste": "הדבקת טקסט",
+      "drop_hint": "גררו קובץ כתוביות לכאן, או לחצו לבחירה",
+      "drop_formats": "תמיכה ב-.srt / .vtt / .ass / .sub / .ttml ועוד",
+      "paste_placeholder": "הדביקו את תוכן הכתוביות..."
+    },
+    "convert": {
+      "source": "מקור",
+      "target": "יעד",
+      "undetected_select": "לא זוהה — בחרו ידנית",
+      "result_title": "תוצאה · {{format}}",
+      "placeholder": "תוצאת ההמרה תופיע כאן לאחר הזנת כתוביות",
+      "failed": "ההמרה נכשלה"
+    },
+    "validate": {
+      "placeholder": "תוצאות הבדיקה יופיעו כאן לאחר הזנת כתוביות",
+      "failed": "הבדיקה נכשלה",
+      "no_issues": "לא נמצאו בעיות"
+    },
+    "normalize": {
+      "title": "ניקוי טקסט",
+      "strip_tags": "הסרת תגי HTML/ASS",
+      "run": "ניקוי",
+      "placeholder": "לחצו «ניקוי» לעיבוד הכתוביות",
+      "failed": "הניקוי נכשל:"
+    },
+    "repair": {
+      "title": "תיקון כתוביות",
+      "min_gap": "אכיפת מרווח מינימלי",
+      "merge_dup": "מיזוג שורות כפולות, מרווח ≤",
+      "rollup": "תיקון Roll-up (מיזוג שורות זהות סמוכות)",
+      "edl_title": "כללי נקודות חיתוך (משלוח ל-Netflix)",
+      "edl_pick": "בחירת EDL",
+      "edl_loaded": "{{name}} · {{count}} נקודות חיתוך",
+      "edl_failed": "ניתוח ה-EDL נכשל:",
+      "fps": "קצב פריימים",
+      "before_frames": "שמירה לפני",
+      "after_frames_sep": "פריימים · אחרי",
+      "frames": "פריימים",
+      "run": "החלת תיקונים",
+      "placeholder": "בחרו תיקונים ולחצו «החלה»",
+      "failed": "התיקון נכשל:",
+      "count_change": "כתוביות: {{before}} ← {{after}}"
+    },
+    "info": {
+      "title": "מידע על הכתוביות",
+      "placeholder": "המידע יופיע כאן לאחר הזנת כתוביות",
+      "failed": "לא ניתן לנתח את הכתוביות:",
+      "row_format": "פורמט",
+      "row_count": "מספר שורות",
+      "row_duration": "משך כולל",
+      "row_first": "חותמת זמן ראשונה",
+      "row_last": "חותמת זמן אחרונה"
+    }
+  },
+  "format": {
+    "srt": "SubRip (SRT)",
+    "vtt": "WebVTT (VTT)",
+    "ass": "Advanced SubStation (ASS)",
+    "ssa": "SubStation Alpha (SSA)",
+    "microdvd": "MicroDVD",
+    "spruce": "Spruce STL",
+    "subviewer": "SubViewer",
+    "ttml": "TTML / IMSC",
+    "dfxp": "DFXP",
+    "itt": "iTunes TT (ITT)",
+    "whisper": "Whisper JSON",
+    "sbv": "YouTube SBV",
+    "lrc": "מילים LRC",
+    "sami": "SAMI",
+    "mpl2": "MPL2",
+    "scc": "SCC (שידור)",
+    "ebu_stl": "EBU STL (שידור)"
+  },
+  "guideline": {
+    "basic": "בסיסי",
+    "netflix": "תקן Netflix",
+    "bbc": "BBC",
+    "ted": "TED",
+    "ard": "ARD/ORF/SRF/ZDF",
+    "channel4": "Channel 4"
+  },
+  "footer": {
+    "supported": "פורמטים נתמכים:",
+    "based_on_prefix": "נבנה על ספריית",
+    "based_on_suffix": "Rust · מורכב ל-WebAssembly · פועל 100% בדפדפן שלכם"
+  },
+  "theme": {
+    "light": "בהיר",
+    "dark": "כהה",
+    "system": "לפי המערכת",
+    "toggle_title": "החלפת ערכת נושא"
+  },
+  "lang": {
+    "switch": "החלפת שפה"
+  }
+}

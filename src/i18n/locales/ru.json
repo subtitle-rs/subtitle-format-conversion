@@ -1,0 +1,126 @@
+{
+  "app": {
+    "name": "Мастер субтитров",
+    "title": "Мастер субтитров — бесплатный онлайн-конвертер субтитров"
+  },
+  "nav": {
+    "convert": "Конвертация",
+    "validate": "Проверка",
+    "normalize": "Нормализация",
+    "repair": "Исправление",
+    "info": "Информация"
+  },
+  "common": {
+    "copy": "Копировать",
+    "copied": "Скопировано",
+    "download": "Скачать",
+    "count_subtitles": "Субтитров: {{count}}",
+    "issue_count": "Проблем: {{count}}",
+    "local_badge": "Локальная обработка",
+    "local_tooltip": "Файлы не покидают ваш браузер — ничего не загружается на сервер",
+    "loading_engine": "Загрузка движка субтитров...",
+    "engine_error": "Не удалось загрузить движок",
+    "retry_reload": "Перезагрузить",
+    "char_count": "{{count}} симв.",
+    "large_file_warn": "Большой файл — отрисовка может замедлиться"
+  },
+  "tool": {
+    "input": {
+      "title": "Ввод",
+      "tab_upload": "Загрузить файл",
+      "tab_paste": "Вставить текст",
+      "drop_hint": "Перетащите файл субтитров сюда или нажмите для выбора",
+      "drop_formats": "Поддерживаются .srt / .vtt / .ass / .sub / .ttml и другие",
+      "paste_placeholder": "Вставьте содержимое субтитров..."
+    },
+    "convert": {
+      "source": "Источник",
+      "target": "Цель",
+      "undetected_select": "Не распознано — выберите",
+      "result_title": "Результат · {{format}}",
+      "placeholder": "Результат конвертации появится здесь после ввода субтитров",
+      "failed": "Ошибка конвертации"
+    },
+    "validate": {
+      "placeholder": "Результаты проверки появятся здесь после ввода субтитров",
+      "failed": "Ошибка проверки",
+      "no_issues": "Проблем не найдено"
+    },
+    "normalize": {
+      "title": "Нормализация текста",
+      "strip_tags": "Удалить HTML/ASS-теги",
+      "run": "Нормализовать",
+      "placeholder": "Нажмите «Нормализовать» для обработки",
+      "failed": "Ошибка нормализации:"
+    },
+    "repair": {
+      "title": "Исправление субтитров",
+      "min_gap": "Минимальный интервал",
+      "merge_dup": "Объединять дубли, интервал ≤",
+      "rollup": "Roll-up: объединять соседние одинаковые строки",
+      "edl_title": "Правила склеек (сдача в Netflix)",
+      "edl_pick": "Выбрать EDL",
+      "edl_loaded": "{{name}} · склеек: {{count}}",
+      "edl_failed": "Ошибка разбора EDL:",
+      "fps": "Частота кадров",
+      "before_frames": "Отступ до",
+      "after_frames_sep": "кадров · отступ после",
+      "frames": "кадров",
+      "run": "Применить исправления",
+      "placeholder": "Выберите исправления и нажмите «Применить»",
+      "failed": "Ошибка исправления:",
+      "count_change": "Субтитры: {{before}} → {{after}}"
+    },
+    "info": {
+      "title": "О субтитрах",
+      "placeholder": "Информация появится здесь после ввода субтитров",
+      "failed": "Не удалось разобрать субтитры:",
+      "row_format": "Формат",
+      "row_count": "Кол-во строк",
+      "row_duration": "Общая длительность",
+      "row_first": "Первый таймкод",
+      "row_last": "Последний таймкод"
+    }
+  },
+  "format": {
+    "srt": "SubRip (SRT)",
+    "vtt": "WebVTT (VTT)",
+    "ass": "Advanced SubStation (ASS)",
+    "ssa": "SubStation Alpha (SSA)",
+    "microdvd": "MicroDVD",
+    "spruce": "Spruce STL",
+    "subviewer": "SubViewer",
+    "ttml": "TTML / IMSC",
+    "dfxp": "DFXP",
+    "itt": "iTunes TT (ITT)",
+    "whisper": "Whisper JSON",
+    "sbv": "YouTube SBV",
+    "lrc": "Тексты LRC",
+    "sami": "SAMI",
+    "mpl2": "MPL2",
+    "scc": "SCC (вещание)",
+    "ebu_stl": "EBU STL (вещание)"
+  },
+  "guideline": {
+    "basic": "Базовая",
+    "netflix": "Спецификация Netflix",
+    "bbc": "BBC",
+    "ted": "TED",
+    "ard": "ARD/ORF/SRF/ZDF",
+    "channel4": "Channel 4"
+  },
+  "footer": {
+    "supported": "Поддерживаемые форматы:",
+    "based_on_prefix": "Создано на основе библиотеки",
+    "based_on_suffix": "Rust · компилируется в WebAssembly · работает на 100% в браузере"
+  },
+  "theme": {
+    "light": "Светлая",
+    "dark": "Тёмная",
+    "system": "Как в системе",
+    "toggle_title": "Сменить тему"
+  },
+  "lang": {
+    "switch": "Сменить язык"
+  }
+}

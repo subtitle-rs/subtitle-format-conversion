@@ -1,4 +1,5 @@
 import { CheckCircle2, AlertTriangle, XCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -9,18 +10,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FORMAT_LABELS } from "@/lib/formats";
 import type { GuidelinePreset } from "@/lib/subtitler";
 import type { ValidateState } from "@/hooks/useValidate";
 
-const PRESETS: { value: GuidelinePreset; label: string }[] = [
-  { value: "basic", label: "基础" },
-  { value: "netflix", label: "Netflix 出海规范" },
-  { value: "bbc", label: "BBC" },
-  { value: "ted", label: "TED" },
-  { value: "ard", label: "ARD/ORF/SRF/ZDF" },
-  { value: "channel4", label: "Channel 4" },
-];
+const PRESETS: GuidelinePreset[] = ["basic", "netflix", "bbc", "ted", "ard", "channel4"];
 
 interface Props {
   state: ValidateState;
@@ -29,11 +22,13 @@ interface Props {
 }
 
 export function ValidatePanel({ state, preset, onPresetChange }: Props) {
+  const { t } = useTranslation();
+
   if (state.status === "idle") {
     return (
       <Card className="flex h-full items-center justify-center">
         <CardContent className="text-sm text-muted-foreground">
-          输入字幕后,质量校验结果将显示在此
+          {t("tool.validate.placeholder")}
         </CardContent>
       </Card>
     );
@@ -44,8 +39,8 @@ export function ValidatePanel({ state, preset, onPresetChange }: Props) {
       <Card className="flex h-full items-center justify-center">
         <CardContent className="text-center text-sm text-destructive">
           <XCircle className="mx-auto mb-2 h-8 w-8" />
-          <p>校验失败</p>
-          <pre className="mt-2 max-w-full overflow-auto rounded bg-destructive/10 p-2 text-xs">
+          <p>{t("tool.validate.failed")}</p>
+          <pre dir="auto" className="mt-2 max-w-full overflow-auto rounded bg-destructive/10 p-2 text-xs">
             {state.message}
           </pre>
         </CardContent>
@@ -66,8 +61,8 @@ export function ValidatePanel({ state, preset, onPresetChange }: Props) {
             </SelectTrigger>
             <SelectContent>
               {PRESETS.map((p) => (
-                <SelectItem key={p.value} value={p.value}>
-                  {p.label}
+                <SelectItem key={p} value={p}>
+                  {t(`guideline.${p}`)}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -79,10 +74,10 @@ export function ValidatePanel({ state, preset, onPresetChange }: Props) {
           ) : (
             <AlertTriangle className="h-5 w-5 text-yellow-500" />
           )}
-          {FORMAT_LABELS[format] ?? format}
-          <Badge variant="secondary">{count} 条字幕</Badge>
+          {t(`format.${format}`)}
+          <Badge variant="secondary">{t("common.count_subtitles", { count })}</Badge>
           <Badge variant={clean ? "secondary" : "destructive"}>
-            {issue_count} 个问题
+            {t("common.issue_count", { count: issue_count })}
           </Badge>
         </CardTitle>
       </CardHeader>
@@ -90,7 +85,7 @@ export function ValidatePanel({ state, preset, onPresetChange }: Props) {
         {clean ? (
           <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
             <CheckCircle2 className="mr-2 h-5 w-5 text-green-500" />
-            未发现问题
+            {t("tool.validate.no_issues")}
           </div>
         ) : (
           <ScrollArea className="h-full rounded-md border">
@@ -98,7 +93,7 @@ export function ValidatePanel({ state, preset, onPresetChange }: Props) {
               {issues.map((issue, i) => (
                 <li key={i} className="flex gap-2 py-1 font-mono text-xs">
                   <span className="text-yellow-500">•</span>
-                  <span>{issue}</span>
+                  <span dir="auto">{issue}</span>
                 </li>
               ))}
             </ul>

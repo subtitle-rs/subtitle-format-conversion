@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import {
   Select,
   SelectContent,
@@ -6,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ALL_FORMATS, FORMAT_LABELS } from "@/lib/formats";
+import { ALL_FORMATS } from "@/lib/formats";
 import type { SubtitleFormat } from "@/lib/subtitler";
 
 interface Props {
@@ -26,36 +27,38 @@ export function FormatPicker({
   onManualSource,
   onTarget,
 }: Props) {
+  const { t } = useTranslation();
   const displaySource = manualSource ?? sourceFormat;
 
   return (
     <div className="flex flex-wrap items-center gap-3 border-b bg-muted/30 px-6 py-3">
       <div className="flex items-center gap-2">
-        <span className="text-sm text-muted-foreground">源格式</span>
+        <span className="text-sm text-muted-foreground">{t("tool.convert.source")}</span>
         {detectError && !manualSource ? (
           <Select onValueChange={onManualSource} value={manualSource ?? ""}>
             <SelectTrigger className="w-[200px] border-destructive">
-              <SelectValue placeholder="无法识别,请选择" />
+              <SelectValue placeholder={t("tool.convert.undetected_select")} />
             </SelectTrigger>
             <SelectContent>
               {ALL_FORMATS.map((f) => (
                 <SelectItem key={f} value={f}>
-                  {FORMAT_LABELS[f]}
+                  {t(`format.${f}`)}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
         ) : (
           <span className="font-mono text-sm">
-            {displaySource ? FORMAT_LABELS[displaySource] ?? displaySource : "—"}
+            {displaySource ? t(`format.${displaySource}`) : "—"}
           </span>
         )}
       </div>
 
-      <ArrowRight className="h-4 w-4 text-muted-foreground" />
+      {/* rtl:rotate-180 —— RTL 布局下流向箭头随之翻转 */}
+      <ArrowRight className="h-4 w-4 text-muted-foreground rtl:rotate-180" />
 
       <div className="flex items-center gap-2">
-        <span className="text-sm text-muted-foreground">目标格式</span>
+        <span className="text-sm text-muted-foreground">{t("tool.convert.target")}</span>
         <Select value={target} onValueChange={onTarget}>
           <SelectTrigger className="w-[220px]">
             <SelectValue />
@@ -63,7 +66,7 @@ export function FormatPicker({
           <SelectContent>
             {ALL_FORMATS.map((f) => (
               <SelectItem key={f} value={f}>
-                {FORMAT_LABELS[f]}
+                {t(`format.${f}`)}
               </SelectItem>
             ))}
           </SelectContent>

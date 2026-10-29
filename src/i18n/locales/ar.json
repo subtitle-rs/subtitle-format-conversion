@@ -1,0 +1,126 @@
+{
+  "app": {
+    "name": "محرر الترجمات",
+    "title": "محرر الترجمات — محوّل ترجمات مجاني عبر الإنترنت"
+  },
+  "nav": {
+    "convert": "تحويل",
+    "validate": "فحص",
+    "normalize": "تنظيف",
+    "repair": "إصلاح",
+    "info": "معلومات"
+  },
+  "common": {
+    "copy": "نسخ",
+    "copied": "تم النسخ",
+    "download": "تنزيل",
+    "count_subtitles": "{{count}} سطر ترجمة",
+    "issue_count": "{{count}} مشكلات",
+    "local_badge": "معالجة محلية",
+    "local_tooltip": "الملفات لا تغادر متصفحك أبدًا — لا يتم رفع أي شيء",
+    "loading_engine": "جارٍ تحميل محرك الترجمات...",
+    "engine_error": "فشل تحميل المحرك",
+    "retry_reload": "إعادة التحميل",
+    "char_count": "{{count}} حرفًا",
+    "large_file_warn": "ملف كبير — قد يتباطأ العرض"
+  },
+  "tool": {
+    "input": {
+      "title": "الإدخال",
+      "tab_upload": "رفع ملف",
+      "tab_paste": "لصق نص",
+      "drop_hint": "اسحب ملف ترجمة إلى هنا، أو انقر للاختيار",
+      "drop_formats": "يدعم .srt / .vtt / .ass / .sub / .ttml وغيرها",
+      "paste_placeholder": "الصق محتوى الترجمة..."
+    },
+    "convert": {
+      "source": "المصدر",
+      "target": "الهدف",
+      "undetected_select": "لم يتم التعرف — اختر يدويًا",
+      "result_title": "النتيجة · {{format}}",
+      "placeholder": "ستظهر نتيجة التحويل هنا بعد إدخال الترجمات",
+      "failed": "فشل التحويل"
+    },
+    "validate": {
+      "placeholder": "ستظهر نتائج الفحص هنا بعد إدخال الترجمات",
+      "failed": "فشل الفحص",
+      "no_issues": "لا توجد مشكلات"
+    },
+    "normalize": {
+      "title": "تنظيف النص",
+      "strip_tags": "إزالة وسوم HTML/ASS",
+      "run": "تنظيف",
+      "placeholder": "انقر «تنظيف» لمعالجة الترجمات",
+      "failed": "فشل التنظيف:"
+    },
+    "repair": {
+      "title": "إصلاح الترجمات",
+      "min_gap": "فرض فاصل زمني أدنى",
+      "merge_dup": "دمج الأسطر المكررة، فاصل ≤",
+      "rollup": "إصلاح Roll-up (دمج الأسطر المتطابقة المتجاورة)",
+      "edl_title": "قواعد نقاط القطع (تسليم Netflix)",
+      "edl_pick": "اختر ملف EDL",
+      "edl_loaded": "{{name}} · {{count}} نقطة قطع",
+      "edl_failed": "فشل تحليل EDL:",
+      "fps": "معدل الإطارات",
+      "before_frames": "إطار احتياطي قبل",
+      "after_frames_sep": "إطار · احتياطي بعد",
+      "frames": "إطار",
+      "run": "تطبيق الإصلاحات",
+      "placeholder": "اختر الإصلاحات ثم انقر «تطبيق»",
+      "failed": "فشل الإصلاح:",
+      "count_change": "الترجمات: {{before}} → {{after}}"
+    },
+    "info": {
+      "title": "معلومات الترجمة",
+      "placeholder": "ستظهر المعلومات هنا بعد إدخال الترجمات",
+      "failed": "تعذر تحليل الترجمات:",
+      "row_format": "الصيغة",
+      "row_count": "عدد الأسطر",
+      "row_duration": "المدة الإجمالية",
+      "row_first": "أول طابع زمني",
+      "row_last": "آخر طابع زمني"
+    }
+  },
+  "format": {
+    "srt": "SubRip (SRT)",
+    "vtt": "WebVTT (VTT)",
+    "ass": "Advanced SubStation (ASS)",
+    "ssa": "SubStation Alpha (SSA)",
+    "microdvd": "MicroDVD",
+    "spruce": "Spruce STL",
+    "subviewer": "SubViewer",
+    "ttml": "TTML / IMSC",
+    "dfxp": "DFXP",
+    "itt": "iTunes TT (ITT)",
+    "whisper": "Whisper JSON",
+    "sbv": "YouTube SBV",
+    "lrc": "كلمات LRC",
+    "sami": "SAMI",
+    "mpl2": "MPL2",
+    "scc": "SCC (بث)",
+    "ebu_stl": "EBU STL (بث)"
+  },
+  "guideline": {
+    "basic": "أساسي",
+    "netflix": "مواصفات Netflix",
+    "bbc": "BBC",
+    "ted": "TED",
+    "ard": "ARD/ORF/SRF/ZDF",
+    "channel4": "Channel 4"
+  },
+  "footer": {
+    "supported": "الصيغ المدعومة:",
+    "based_on_prefix": "مبني على مكتبة",
+    "based_on_suffix": "Rust · مُجمَّع إلى WebAssembly · يعمل 100% داخل متصفحك"
+  },
+  "theme": {
+    "light": "فاتح",
+    "dark": "داكن",
+    "system": "حسب النظام",
+    "toggle_title": "تبديل المظهر"
+  },
+  "lang": {
+    "switch": "تغيير اللغة"
+  }
+}

@@ -4,41 +4,21 @@ export const FORMAT_EXTENSIONS: Record<string, string> = {
   ass: "ass",
   ssa: "ssa",
   microdvd: "sub",
+  spruce: "spruce",
   subviewer: "sub",
   ttml: "ttml",
+  dfxp: "dfxp",
+  itt: "itt",
+  whisper: "json",
   sbv: "sbv",
   lrc: "lrc",
   sami: "smi",
   mpl2: "mpl",
   scc: "scc",
   ebu_stl: "stl",
-  spruce: "spruce",
-  itt: "itt",
-  dfxp: "dfxp",
-  whisper: "json",
 };
 
-export const FORMAT_LABELS: Record<string, string> = {
-  srt: "SubRip (SRT)",
-  vtt: "WebVTT (VTT)",
-  ass: "Advanced SubStation (ASS)",
-  ssa: "SubStation Alpha (SSA)",
-  microdvd: "MicroDVD",
-  subviewer: "SubViewer",
-  ttml: "TTML / IMSC",
-  sbv: "YouTube SBV",
-  lrc: "LRC 歌词",
-  sami: "SAMI",
-  mpl2: "MPL2",
-  scc: "SCC (广播)",
-  ebu_stl: "EBU STL (广播)",
-  spruce: "Spruce STL",
-  itt: "iTunes TT (ITT)",
-  dfxp: "DFXP",
-  whisper: "Whisper JSON",
-};
-
-// 与 wasm supported_formats() 一致;硬编码作 fallback,wasm 加载后会被覆盖
+// 显示名已迁入 i18n(format.* 翻译键)
 export const ALL_FORMATS = Object.keys(FORMAT_EXTENSIONS);
 
 // 默认目标:源是 srt 则默认 vtt,反之亦然;其余默认 vtt

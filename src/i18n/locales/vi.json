@@ -1,0 +1,126 @@
+{
+  "app": {
+    "name": "Xưởng phụ đề",
+    "title": "Xưởng phụ đề — công cụ chuyển đổi phụ đề trực tuyến miễn phí"
+  },
+  "nav": {
+    "convert": "Chuyển đổi",
+    "validate": "Kiểm tra",
+    "normalize": "Chuẩn hóa",
+    "repair": "Sửa lỗi",
+    "info": "Thông tin"
+  },
+  "common": {
+    "copy": "Sao chép",
+    "copied": "Đã sao chép",
+    "download": "Tải xuống",
+    "count_subtitles": "{{count}} câu phụ đề",
+    "issue_count": "{{count}} vấn đề",
+    "local_badge": "Xử lý cục bộ",
+    "local_tooltip": "Tệp không bao giờ rời khỏi trình duyệt — không tải lên máy chủ",
+    "loading_engine": "Đang tải engine phụ đề...",
+    "engine_error": "Không thể tải engine",
+    "retry_reload": "Tải lại",
+    "char_count": "{{count}} ký tự",
+    "large_file_warn": "Tệp lớn — hiển thị có thể chậm"
+  },
+  "tool": {
+    "input": {
+      "title": "Đầu vào",
+      "tab_upload": "Tải tệp lên",
+      "tab_paste": "Dán văn bản",
+      "drop_hint": "Kéo tệp phụ đề vào đây hoặc bấm để chọn",
+      "drop_formats": "Hỗ trợ .srt / .vtt / .ass / .sub / .ttml và hơn thế",
+      "paste_placeholder": "Dán nội dung phụ đề..."
+    },
+    "convert": {
+      "source": "Nguồn",
+      "target": "Đích",
+      "undetected_select": "Không nhận dạng được — hãy chọn",
+      "result_title": "Kết quả · {{format}}",
+      "placeholder": "Kết quả chuyển đổi sẽ hiển thị ở đây sau khi nhập phụ đề",
+      "failed": "Chuyển đổi thất bại"
+    },
+    "validate": {
+      "placeholder": "Kết quả kiểm tra sẽ hiển thị ở đây sau khi nhập phụ đề",
+      "failed": "Kiểm tra thất bại",
+      "no_issues": "Không phát hiện vấn đề"
+    },
+    "normalize": {
+      "title": "Chuẩn hóa văn bản",
+      "strip_tags": "Loại bỏ thẻ HTML/ASS",
+      "run": "Chuẩn hóa",
+      "placeholder": "Bấm «Chuẩn hóa» để xử lý phụ đề",
+      "failed": "Chuẩn hóa thất bại:"
+    },
+    "repair": {
+      "title": "Sửa lỗi phụ đề",
+      "min_gap": "Đảm bảo khoảng cách tối thiểu",
+      "merge_dup": "Gộp dòng trùng lặp, khoảng ≤",
+      "rollup": "Sửa roll-up (gộp các dòng giống nhau liền kề)",
+      "edl_title": "Quy tắc điểm cắt (bàn giao Netflix)",
+      "edl_pick": "Chọn EDL",
+      "edl_loaded": "{{name}} · {{count}} điểm cắt",
+      "edl_failed": "Phân tích EDL thất bại:",
+      "fps": "Tốc độ khung hình",
+      "before_frames": "Chừa trước",
+      "after_frames_sep": "khung · chừa sau",
+      "frames": "khung",
+      "run": "Áp dụng sửa lỗi",
+      "placeholder": "Chọn mục sửa lỗi rồi bấm «Áp dụng»",
+      "failed": "Sửa lỗi thất bại:",
+      "count_change": "Phụ đề {{before}} → {{after}} câu"
+    },
+    "info": {
+      "title": "Thông tin phụ đề",
+      "placeholder": "Thông tin sẽ hiển thị ở đây sau khi nhập phụ đề",
+      "failed": "Không thể phân tích phụ đề:",
+      "row_format": "Định dạng",
+      "row_count": "Số câu phụ đề",
+      "row_duration": "Tổng thời lượng",
+      "row_first": "Thời điểm đầu",
+      "row_last": "Thời điểm cuối"
+    }
+  },
+  "format": {
+    "srt": "SubRip (SRT)",
+    "vtt": "WebVTT (VTT)",
+    "ass": "Advanced SubStation (ASS)",
+    "ssa": "SubStation Alpha (SSA)",
+    "microdvd": "MicroDVD",
+    "spruce": "Spruce STL",
+    "subviewer": "SubViewer",
+    "ttml": "TTML / IMSC",
+    "dfxp": "DFXP",
+    "itt": "iTunes TT (ITT)",
+    "whisper": "Whisper JSON",
+    "sbv": "YouTube SBV",
+    "lrc": "Lời bài hát LRC",
+    "sami": "SAMI",
+    "mpl2": "MPL2",
+    "scc": "SCC (phát sóng)",
+    "ebu_stl": "EBU STL (phát sóng)"
+  },
+  "guideline": {
+    "basic": "Cơ bản",
+    "netflix": "Đặc tả Netflix",
+    "bbc": "BBC",
+    "ted": "TED",
+    "ard": "ARD/ORF/SRF/ZDF",
+    "channel4": "Channel 4"
+  },
+  "footer": {
+    "supported": "Các định dạng được hỗ trợ:",
+    "based_on_prefix": "Xây dựng trên thư viện",
+    "based_on_suffix": "Rust · biên dịch sang WebAssembly · chạy 100% trong trình duyệt"
+  },
+  "theme": {
+    "light": "Sáng",
+    "dark": "Tối",
+    "system": "Theo hệ thống",
+    "toggle_title": "Đổi giao diện"
+  },
+  "lang": {
+    "switch": "Đổi ngôn ngữ"
+  }
+}
