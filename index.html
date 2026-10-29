@@ -5,16 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>字幕格式转换 · Subtitle Converter</title>
     <script>
-      // 防 FOUC:在 React 加载前同步应用主题
+      // 防 FOUC:在 React 加载前同步应用主题 + 语言方向
       (function () {
         try {
           var t = localStorage.getItem("subtitle-converter-theme");
           var dark =
             t === "dark" ||
-            (!t && window.matchMedia("(prefers-color-scheme: dark)").matches) ||
-            (t === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+            ((!t || t === "system") && window.matchMedia("(prefers-color-scheme: dark)").matches);
           if (dark) document.documentElement.classList.add("dark");
           document.documentElement.style.colorScheme = dark ? "dark" : "light";
+        } catch (e) {}
+        try {
+          var RTL = ["ar", "he"];
+          var lang = localStorage.getItem("subtitle-converter-lang") || "";
+          // 存的是具体 code(如 zh-CN);未存过时不猜,交由 i18next 检测后由 useDocumentLang 设置
+          if (lang) {
+            document.documentElement.lang = lang;
+            var base = lang.split("-")[0];
+            document.documentElement.dir = RTL.indexOf(base) !== -1 ? "rtl" : "ltr";
+          }
         } catch (e) {}
       })();
     </script>

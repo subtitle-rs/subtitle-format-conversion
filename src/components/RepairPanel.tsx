@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Check, Copy, Download, Wrench, FileUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -27,6 +28,7 @@ interface Props {
 const FPS_OPTIONS = [23.976, 24, 25, 29.97, 30];
 
 export function RepairPanel({ raw, state, options, onOptionsChange, onRun, fileName }: Props) {
+  const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
   const [edlName, setEdlName] = useState<string | null>(null);
   const [edlError, setEdlError] = useState<string | null>(null);
@@ -41,7 +43,7 @@ export function RepairPanel({ raw, state, options, onOptionsChange, onRun, fileN
       const resp: EdlCutsResponse = parseEdlCuts(reader.result as string, options.fps);
       if (resp.ok) {
         set("cutsMs", resp.cuts);
-        setEdlName(`${file.name} · ${resp.cuts.length} 个切镜点`);
+        setEdlName(t("tool.repair.edl_loaded", { name: file.name, count: resp.cuts.length }));
         setEdlError(null);
       } else {
         set("cutsMs", []);
@@ -77,7 +79,7 @@ export function RepairPanel({ raw, state, options, onOptionsChange, onRun, fileN
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2 text-base">
           <Wrench className="h-5 w-5" />
-          字幕修复
+          {t("tool.repair.title")}
         </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col gap-4">
@@ -88,13 +90,13 @@ export function RepairPanel({ raw, state, options, onOptionsChange, onRun, fileN
               checked={options.minGapEnabled}
               onCheckedChange={(c) => set("minGapEnabled", c === true)}
             />
-            保证最小间隔
+            {t("tool.repair.min_gap")}
             <Input
               type="number"
               value={options.minGapMs}
               onChange={(e) => set("minGapMs", Number(e.target.value) || 0)}
               disabled={!options.minGapEnabled}
-              className="ml-auto h-7 w-24"
+              className="ms-auto h-7 w-24"
             />
             <span className="text-xs text-muted-foreground">ms</span>
           </label>
@@ -103,7 +105,7 @@ export function RepairPanel({ raw, state, options, onOptionsChange, onRun, fileN
               checked={options.mergeEnabled}
               onCheckedChange={(c) => set("mergeEnabled", c === true)}
             />
-            合并重复文本 gap ≤
+            {t("tool.repair.merge_dup")}
             <Input
               type="number"
               value={options.mergeGapMs}
@@ -118,20 +120,20 @@ export function RepairPanel({ raw, state, options, onOptionsChange, onRun, fileN
               checked={options.rollup}
               onCheckedChange={(c) => set("rollup", c === true)}
             />
-            Roll-up 修复(合并相邻相同文本)
+            {t("tool.repair.rollup")}
           </label>
         </div>
 
         {/* EDL 镜头切换 */}
         <div className="rounded-md border p-3">
-          <p className="mb-2 text-sm font-medium">镜头切换规则(Netflix 出海)</p>
+          <p className="mb-2 text-sm font-medium">{t("tool.repair.edl_title")}</p>
           <div className="flex flex-wrap items-center gap-2 text-sm">
             <Button variant="outline" size="sm" onClick={() => edlRef.current?.click()}>
-              <FileUp className="mr-1 h-3.5 w-3.5" /> 选择 EDL
+              <FileUp className="mr-1 h-3.5 w-3.5" /> {t("tool.repair.edl_pick")}
             </Button>
             {edlName && <span className="text-xs text-muted-foreground">{edlName}</span>}
             {edlError && (
-              <span className="text-xs text-destructive">EDL 解析失败:{edlError}</span>
+              <span className="text-xs text-destructive">{t("tool.repair.edl_failed")} {edlError}</span>
             )}
             <input
               ref={edlRef}
@@ -145,7 +147,7 @@ export function RepairPanel({ raw, state, options, onOptionsChange, onRun, fileN
             />
           </div>
           <div className="mt-2 flex flex-wrap items-center gap-2 text-sm">
-            <span className="text-muted-foreground">帧率</span>
+            <span className="text-muted-foreground">{t("tool.repair.fps")}</span>
             <Select value={String(options.fps)} onValueChange={(v) => set("fps", Number(v))}>
               <SelectTrigger className="w-[110px]">
                 <SelectValue />
@@ -158,37 +160,37 @@ export function RepairPanel({ raw, state, options, onOptionsChange, onRun, fileN
                 ))}
               </SelectContent>
             </Select>
-            <span className="ml-2 text-muted-foreground">切前留</span>
+            <span className="ms-2 text-muted-foreground">{t("tool.repair.before_frames")}</span>
             <Input
               type="number"
               value={options.beforeFrames}
               onChange={(e) => set("beforeFrames", Number(e.target.value) || 0)}
               className="h-7 w-16"
             />
-            <span className="text-muted-foreground">帧 · 切后留</span>
+            <span className="text-muted-foreground">{t("tool.repair.after_frames_sep")}</span>
             <Input
               type="number"
               value={options.afterFrames}
               onChange={(e) => set("afterFrames", Number(e.target.value) || 0)}
               className="h-7 w-16"
             />
-            <span className="text-muted-foreground">帧</span>
+            <span className="text-muted-foreground">{t("tool.repair.frames")}</span>
           </div>
         </div>
 
         <Button onClick={onRun} disabled={!canRun} size="sm" className="w-fit">
-          <Wrench className="mr-1 h-3.5 w-3.5" /> 执行修复
+          <Wrench className="mr-1 h-3.5 w-3.5" /> {t("tool.repair.run")}
         </Button>
 
         {/* 结果区 */}
         {state.status === "idle" && (
           <div className="flex flex-1 items-center justify-center text-sm text-muted-foreground">
-            勾选修复项后点击「执行修复」
+            {t("tool.repair.placeholder")}
           </div>
         )}
         {state.status === "error" && (
           <div className="flex flex-1 items-center justify-center text-sm text-destructive">
-            修复失败:{state.message}
+            {t("tool.repair.failed")} {state.message}
           </div>
         )}
         {state.status === "ok" && (
@@ -200,17 +202,17 @@ export function RepairPanel({ raw, state, options, onOptionsChange, onRun, fileN
                 ) : (
                   <Copy className="mr-1 h-3.5 w-3.5" />
                 )}
-                {copied ? "已复制" : "复制"}
+                {copied ? t("common.copied") : t("common.copy")}
               </Button>
               <Button size="sm" onClick={onDownload}>
-                <Download className="mr-1 h-3.5 w-3.5" /> 下载
+                <Download className="mr-1 h-3.5 w-3.5" /> {t("common.download")}
               </Button>
               <span className="text-muted-foreground">
-                字幕 {state.before} 条 → {state.after} 条
+                {t("tool.repair.count_change", { before: state.before, after: state.after })}
               </span>
             </div>
             <ScrollArea className="flex-1 rounded-md border">
-              <pre className="p-3 font-mono text-xs leading-relaxed">{state.output}</pre>
+              <pre dir="auto" className="p-3 font-mono text-xs leading-relaxed">{state.output}</pre>
             </ScrollArea>
           </>
         )}

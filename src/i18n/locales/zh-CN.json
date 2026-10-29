@@ -1,0 +1,126 @@
+{
+  "app": {
+    "name": "字幕工具台",
+    "title": "字幕工具台 — 免费在线字幕格式转换"
+  },
+  "nav": {
+    "convert": "格式转换",
+    "validate": "质量校验",
+    "normalize": "文本规范化",
+    "repair": "修复",
+    "info": "字幕信息"
+  },
+  "common": {
+    "copy": "复制",
+    "copied": "已复制",
+    "download": "下载",
+    "count_subtitles": "{{count}} 条字幕",
+    "issue_count": "{{count}} 个问题",
+    "local_badge": "纯本地处理",
+    "local_tooltip": "文件不离开你的浏览器,无需上传",
+    "loading_engine": "正在加载字幕引擎...",
+    "engine_error": "引擎加载失败",
+    "retry_reload": "刷新重试",
+    "char_count": "{{count}} 字符",
+    "large_file_warn": "文件较大,可能影响渲染"
+  },
+  "tool": {
+    "input": {
+      "title": "输入",
+      "tab_upload": "上传文件",
+      "tab_paste": "粘贴文本",
+      "drop_hint": "拖拽字幕文件到此处,或点击选择",
+      "drop_formats": "支持 .srt / .vtt / .ass / .sub / .ttml 等格式",
+      "paste_placeholder": "粘贴字幕内容..."
+    },
+    "convert": {
+      "source": "源格式",
+      "target": "目标格式",
+      "undetected_select": "无法识别,请选择",
+      "result_title": "转换结果 · {{format}}",
+      "placeholder": "输入字幕内容后,转换结果将显示在此",
+      "failed": "转换失败"
+    },
+    "validate": {
+      "placeholder": "输入字幕后,质量校验结果将显示在此",
+      "failed": "校验失败",
+      "no_issues": "未发现问题"
+    },
+    "normalize": {
+      "title": "文本规范化",
+      "strip_tags": "剥离 HTML/ASS 标签",
+      "run": "规范化",
+      "placeholder": "点击「规范化」处理字幕",
+      "failed": "规范化失败:"
+    },
+    "repair": {
+      "title": "字幕修复",
+      "min_gap": "保证最小间隔",
+      "merge_dup": "合并重复文本 gap ≤",
+      "rollup": "Roll-up 修复(合并相邻相同文本)",
+      "edl_title": "镜头切换规则(Netflix 出海)",
+      "edl_pick": "选择 EDL",
+      "edl_loaded": "{{name}} · {{count}} 个切镜点",
+      "edl_failed": "EDL 解析失败:",
+      "fps": "帧率",
+      "before_frames": "切前留",
+      "after_frames_sep": "帧 · 切后留",
+      "frames": "帧",
+      "run": "执行修复",
+      "placeholder": "勾选修复项后点击「执行修复」",
+      "failed": "修复失败:",
+      "count_change": "字幕 {{before}} 条 → {{after}} 条"
+    },
+    "info": {
+      "title": "字幕信息",
+      "placeholder": "输入字幕后,字幕信息将显示在此",
+      "failed": "无法解析字幕:",
+      "row_format": "格式",
+      "row_count": "字幕条数",
+      "row_duration": "总时长",
+      "row_first": "首时间戳",
+      "row_last": "末时间戳"
+    }
+  },
+  "format": {
+    "srt": "SubRip (SRT)",
+    "vtt": "WebVTT (VTT)",
+    "ass": "Advanced SubStation (ASS)",
+    "ssa": "SubStation Alpha (SSA)",
+    "microdvd": "MicroDVD",
+    "spruce": "Spruce STL",
+    "subviewer": "SubViewer",
+    "ttml": "TTML / IMSC",
+    "dfxp": "DFXP",
+    "itt": "iTunes TT (ITT)",
+    "whisper": "Whisper JSON",
+    "sbv": "YouTube SBV",
+    "lrc": "LRC 歌词",
+    "sami": "SAMI",
+    "mpl2": "MPL2",
+    "scc": "SCC (广播)",
+    "ebu_stl": "EBU STL (广播)"
+  },
+  "guideline": {
+    "basic": "基础",
+    "netflix": "Netflix 出海规范",
+    "bbc": "BBC",
+    "ted": "TED",
+    "ard": "ARD/ORF/SRF/ZDF",
+    "channel4": "Channel 4"
+  },
+  "footer": {
+    "supported": "支持的字幕格式:",
+    "based_on_prefix": "基于",
+    "based_on_suffix": "Rust 库 · 编译为 WebAssembly · 100% 浏览器内运行"
+  },
+  "theme": {
+    "light": "亮色",
+    "dark": "暗色",
+    "system": "跟随系统",
+    "toggle_title": "切换主题"
+  },
+  "lang": {
+    "switch": "切换语言"
+  }
+}

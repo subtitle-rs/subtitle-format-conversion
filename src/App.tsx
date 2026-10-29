@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ensureWasm } from "@/lib/subtitler";
+import { useDocumentLang } from "@/hooks/useDocumentLang";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Header } from "@/components/Header";
@@ -40,8 +42,11 @@ function Workbench() {
 }
 
 export default function App() {
+  const { t } = useTranslation();
   const [wasmReady, setWasmReady] = useState(false);
   const [wasmError, setWasmError] = useState<string | null>(null);
+
+  useDocumentLang();
 
   useEffect(() => {
     ensureWasm()
@@ -54,15 +59,15 @@ export default function App() {
       <TooltipProvider delayDuration={200}>
         {wasmError ? (
           <div className="flex h-screen flex-col items-center justify-center gap-2 text-center">
-            <p className="text-destructive">引擎加载失败</p>
+            <p className="text-destructive">{t("common.engine_error")}</p>
             <p className="text-sm text-muted-foreground">{wasmError}</p>
             <button onClick={() => location.reload()} className="text-sm underline">
-              刷新重试
+              {t("common.retry_reload")}
             </button>
           </div>
         ) : !wasmReady ? (
           <div className="flex h-screen items-center justify-center text-sm text-muted-foreground">
-            正在加载字幕引擎...
+            {t("common.loading_engine")}
           </div>
         ) : (
           <Workbench />

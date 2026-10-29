@@ -1,19 +1,22 @@
+import { useTranslation } from "react-i18next";
 import { Badge } from "@/components/ui/badge";
-import { ALL_FORMATS, FORMAT_LABELS } from "@/lib/formats";
+import { ALL_FORMATS } from "@/lib/formats";
 
 export function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="border-t px-6 py-4 text-sm text-muted-foreground">
-      <p className="mb-2">支持的字幕格式:</p>
+      <p className="mb-2">{t("footer.supported")}</p>
       <div className="flex flex-wrap gap-1.5">
         {ALL_FORMATS.map((f) => (
           <Badge key={f} variant="outline" className="font-mono text-xs">
-            {FORMAT_LABELS[f] ?? f}
+            {t(`format.${f}`)}
           </Badge>
         ))}
       </div>
       <p className="mt-3 text-xs">
-        基于{" "}
+        {t("footer.based_on_prefix")}{" "}
         <a
           className="underline"
           href="https://crates.io/crates/subtitler"
@@ -22,7 +25,7 @@ export function Footer() {
         >
           subtitler
         </a>{" "}
-        Rust 库 · 编译为 WebAssembly · 100% 浏览器内运行
+        {t("footer.based_on_suffix")}
       </p>
     </footer>
   );
