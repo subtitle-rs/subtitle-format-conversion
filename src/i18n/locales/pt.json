@@ -1,0 +1,126 @@
+{
+  "app": {
+    "name": "Oficina de legendas",
+    "title": "Oficina de legendas — conversor de legendas online gratuito"
+  },
+  "nav": {
+    "convert": "Converter",
+    "validate": "Validar",
+    "normalize": "Normalizar",
+    "repair": "Reparar",
+    "info": "Info"
+  },
+  "common": {
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "download": "Baixar",
+    "count_subtitles": "{{count}} legendas",
+    "issue_count": "{{count}} problemas",
+    "local_badge": "Processamento local",
+    "local_tooltip": "Os arquivos nunca saem do seu navegador — nada é enviado",
+    "loading_engine": "Carregando o motor de legendas...",
+    "engine_error": "Falha ao carregar o motor",
+    "retry_reload": "Recarregar",
+    "char_count": "{{count}} caracteres",
+    "large_file_warn": "Arquivo grande — a exibição pode ficar lenta"
+  },
+  "tool": {
+    "input": {
+      "title": "Entrada",
+      "tab_upload": "Enviar arquivo",
+      "tab_paste": "Colar texto",
+      "drop_hint": "Arraste um arquivo de legenda aqui, ou clique para escolher",
+      "drop_formats": "Suporta .srt / .vtt / .ass / .sub / .ttml e mais",
+      "paste_placeholder": "Cole o conteúdo da legenda..."
+    },
+    "convert": {
+      "source": "Origem",
+      "target": "Destino",
+      "undetected_select": "Não reconhecido — escolha um",
+      "result_title": "Resultado · {{format}}",
+      "placeholder": "O resultado da conversão aparecerá aqui",
+      "failed": "Falha na conversão"
+    },
+    "validate": {
+      "placeholder": "Os resultados da validação aparecerão aqui",
+      "failed": "Falha na validação",
+      "no_issues": "Nenhum problema encontrado"
+    },
+    "normalize": {
+      "title": "Normalização de texto",
+      "strip_tags": "Remover tags HTML/ASS",
+      "run": "Normalizar",
+      "placeholder": "Clique em «Normalizar» para processar as legendas",
+      "failed": "Falha na normalização:"
+    },
+    "repair": {
+      "title": "Reparar legendas",
+      "min_gap": "Impor intervalo mínimo",
+      "merge_dup": "Mesclar duplicatas, intervalo ≤",
+      "rollup": "Reparo roll-up (mesclar linhas idênticas adjacentes)",
+      "edl_title": "Regras de cortes (entrega Netflix)",
+      "edl_pick": "Escolher EDL",
+      "edl_loaded": "{{name}} · {{count}} cortes",
+      "edl_failed": "Falha ao analisar EDL:",
+      "fps": "Taxa de quadros",
+      "before_frames": "Folga antes",
+      "after_frames_sep": "quadros · folga depois",
+      "frames": "quadros",
+      "run": "Aplicar reparos",
+      "placeholder": "Escolha os reparos e clique em «Aplicar»",
+      "failed": "Falha no reparo:",
+      "count_change": "{{before}} → {{after}} legendas"
+    },
+    "info": {
+      "title": "Info da legenda",
+      "placeholder": "As informações aparecerão aqui",
+      "failed": "Não foi possível analisar as legendas:",
+      "row_format": "Formato",
+      "row_count": "Número de legendas",
+      "row_duration": "Duração total",
+      "row_first": "Primeiro carimbo de tempo",
+      "row_last": "Último carimbo de tempo"
+    }
+  },
+  "format": {
+    "srt": "SubRip (SRT)",
+    "vtt": "WebVTT (VTT)",
+    "ass": "Advanced SubStation (ASS)",
+    "ssa": "SubStation Alpha (SSA)",
+    "microdvd": "MicroDVD",
+    "spruce": "Spruce STL",
+    "subviewer": "SubViewer",
+    "ttml": "TTML / IMSC",
+    "dfxp": "DFXP",
+    "itt": "iTunes TT (ITT)",
+    "whisper": "Whisper JSON",
+    "sbv": "YouTube SBV",
+    "lrc": "Letras LRC",
+    "sami": "SAMI",
+    "mpl2": "MPL2",
+    "scc": "SCC (transmissão)",
+    "ebu_stl": "EBU STL (transmissão)"
+  },
+  "guideline": {
+    "basic": "Básico",
+    "netflix": "Especificação Netflix",
+    "bbc": "BBC",
+    "ted": "TED",
+    "ard": "ARD/ORF/SRF/ZDF",
+    "channel4": "Channel 4"
+  },
+  "footer": {
+    "supported": "Formatos suportados:",
+    "based_on_prefix": "Construído sobre a biblioteca",
+    "based_on_suffix": "Rust · compilado para WebAssembly · roda 100% no seu navegador"
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Escuro",
+    "system": "Sistema",
+    "toggle_title": "Alternar tema"
+  },
+  "lang": {
+    "switch": "Mudar idioma"
+  }
+}

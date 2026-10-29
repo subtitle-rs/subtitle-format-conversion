@@ -1,0 +1,126 @@
+{
+  "app": {
+    "name": "Taller de subtítulos",
+    "title": "Taller de subtítulos — convertidor de subtítulos en línea gratuito"
+  },
+  "nav": {
+    "convert": "Convertir",
+    "validate": "Validar",
+    "normalize": "Normalizar",
+    "repair": "Reparar",
+    "info": "Info"
+  },
+  "common": {
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "download": "Descargar",
+    "count_subtitles": "{{count}} subtítulos",
+    "issue_count": "{{count}} problemas",
+    "local_badge": "Procesamiento local",
+    "local_tooltip": "Los archivos nunca salen de tu navegador — nada se sube",
+    "loading_engine": "Cargando el motor de subtítulos...",
+    "engine_error": "Error al cargar el motor",
+    "retry_reload": "Recargar",
+    "char_count": "{{count}} caracteres",
+    "large_file_warn": "Archivo grande — la visualización puede ser lenta"
+  },
+  "tool": {
+    "input": {
+      "title": "Entrada",
+      "tab_upload": "Subir archivo",
+      "tab_paste": "Pegar texto",
+      "drop_hint": "Arrastra un archivo de subtítulos aquí, o haz clic para elegir",
+      "drop_formats": "Admite .srt / .vtt / .ass / .sub / .ttml y más",
+      "paste_placeholder": "Pega el contenido de los subtítulos..."
+    },
+    "convert": {
+      "source": "Origen",
+      "target": "Destino",
+      "undetected_select": "No reconocido — elige uno",
+      "result_title": "Resultado · {{format}}",
+      "placeholder": "El resultado de la conversión aparecerá aquí",
+      "failed": "Error de conversión"
+    },
+    "validate": {
+      "placeholder": "Los resultados de la validación aparecerán aquí",
+      "failed": "Error de validación",
+      "no_issues": "No se encontraron problemas"
+    },
+    "normalize": {
+      "title": "Normalización de texto",
+      "strip_tags": "Eliminar etiquetas HTML/ASS",
+      "run": "Normalizar",
+      "placeholder": "Haz clic en «Normalizar» para procesar los subtítulos",
+      "failed": "Error de normalización:"
+    },
+    "repair": {
+      "title": "Reparar subtítulos",
+      "min_gap": "Imponer intervalo mínimo",
+      "merge_dup": "Fusionar duplicados, hueco ≤",
+      "rollup": "Reparación roll-up (fusionar líneas idénticas adyacentes)",
+      "edl_title": "Reglas de cortes (entrega Netflix)",
+      "edl_pick": "Elegir EDL",
+      "edl_loaded": "{{name}} · {{count}} cortes",
+      "edl_failed": "Error al analizar EDL:",
+      "fps": "Frecuencia de fotogramas",
+      "before_frames": "Margen antes",
+      "after_frames_sep": "fotogramas · margen después",
+      "frames": "fotogramas",
+      "run": "Aplicar reparaciones",
+      "placeholder": "Elige las reparaciones y haz clic en «Aplicar»",
+      "failed": "Error de reparación:",
+      "count_change": "{{before}} → {{after}} subtítulos"
+    },
+    "info": {
+      "title": "Info de subtítulos",
+      "placeholder": "La información aparecerá aquí",
+      "failed": "No se pudieron analizar los subtítulos:",
+      "row_format": "Formato",
+      "row_count": "Número de subtítulos",
+      "row_duration": "Duración total",
+      "row_first": "Primera marca de tiempo",
+      "row_last": "Última marca de tiempo"
+    }
+  },
+  "format": {
+    "srt": "SubRip (SRT)",
+    "vtt": "WebVTT (VTT)",
+    "ass": "Advanced SubStation (ASS)",
+    "ssa": "SubStation Alpha (SSA)",
+    "microdvd": "MicroDVD",
+    "spruce": "Spruce STL",
+    "subviewer": "SubViewer",
+    "ttml": "TTML / IMSC",
+    "dfxp": "DFXP",
+    "itt": "iTunes TT (ITT)",
+    "whisper": "Whisper JSON",
+    "sbv": "YouTube SBV",
+    "lrc": "Letras LRC",
+    "sami": "SAMI",
+    "mpl2": "MPL2",
+    "scc": "SCC (difusión)",
+    "ebu_stl": "EBU STL (difusión)"
+  },
+  "guideline": {
+    "basic": "Básico",
+    "netflix": "Especificación Netflix",
+    "bbc": "BBC",
+    "ted": "TED",
+    "ard": "ARD/ORF/SRF/ZDF",
+    "channel4": "Channel 4"
+  },
+  "footer": {
+    "supported": "Formatos admitidos:",
+    "based_on_prefix": "Construido sobre la biblioteca",
+    "based_on_suffix": "Rust · compilado a WebAssembly · funciona 100 % en tu navegador"
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema",
+    "toggle_title": "Cambiar tema"
+  },
+  "lang": {
+    "switch": "Cambiar idioma"
+  }
+}
