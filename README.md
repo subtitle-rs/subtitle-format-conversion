@@ -1,122 +1,128 @@
-# 字幕工具台 · Subtitle Workbench
+# Subtitle Workbench
 
-> 🌐 **[在线使用 →](https://subtitle-rs.github.io/subtitle-format-conversion/)**
+**English** | [简体中文](./README.zh-CN.md)
 
-纯客户端的字幕工具台。基于 [subtitler](https://crates.io/crates/subtitler) Rust 库编译为 WebAssembly,100% 在浏览器内运行 —— 文件不离开设备,无后端、无上传。
+> 🌐 **[Try it online →](https://subtitle-rs.github.io/subtitle-format-conversion/)**
 
-支持 17 种字幕格式:SRT · VTT · ASS · SSA · MicroDVD · Spruce · SubViewer · TTML · DFXP · ITT · Whisper · SBV · LRC · SAMI · MPL2 · SCC · EBU STL。
+A fully client-side subtitle workbench. Built on the [subtitler](https://crates.io/crates/subtitler) Rust library compiled to WebAssembly — everything runs 100% in your browser. **No backend, no uploads: your files never leave your device.**
 
-## 功能
+Supports **17 subtitle formats**: SRT · VTT · ASS · SSA · MicroDVD · Spruce · SubViewer · TTML · DFXP · ITT · Whisper · SBV · LRC · SAMI · MPL2 · SCC · EBU STL
 
-顶部 5 个 Tab,共享一份输入:
+Available in **14 languages**: English · 简体中文 · 繁體中文 · 日本語 · 한국어 · Русский · Français · Deutsch · Español · Português · Italiano · Tiếng Việt · العربية · עברית (with full RTL support)
 
-- **格式转换** — 17 种格式互转,自动检测源格式,实时预览(debounce),复制 / 下载
-- **质量校验** — 基础检查(重叠/负时长/倒序)+ 广播级规则集(Netflix / BBC / TED / ARD / Channel 4)
-- **文本规范化** — 剥离 HTML/ASS 标签(按钮触发,不破坏原文)
-- **修复** — 保证最小间隔 / 合并重复文本 / Roll-up 修复 / EDL 镜头切换规则(Netflix 出海)
-- **字幕信息** — 格式 / 条数 / 总时长 / 首末时间戳,时间戳格式化为 `HH:MM:SS.mmm`
+## Features
 
-通用:
+Five tools in top tabs, all sharing one input:
 
-- 拖拽 / 粘贴上传,所有工具共享同一份输入(切 Tab 不丢内容)
-- 懒计算:只跑当前激活的 Tab,大文件不卡
-- 亮色 / 暗色 / 跟随系统 三态主题
-- 移动端响应式
+- **Convert** — 17-format conversion with auto source detection, live preview (debounced), copy / download
+- **Validate** — basic checks (overlaps, negative durations, out-of-order) plus broadcaster guideline presets: Netflix / BBC / TED / ARD-ORF-SRF-ZDF / Channel 4
+- **Normalize** — strip HTML/ASS tags (button-triggered, original stays intact)
+- **Repair** — enforce minimum gap / merge duplicate lines / roll-up repair / EDL shot-change rules (Netflix delivery)
+- **Info** — format / cue count / total duration / first & last timestamps, formatted as `HH:MM:SS.mmm`
 
-## 技术栈
+Also:
 
-- **WASM 引擎**:`subtitler 2.6.1`,经 `wasm/` 薄包装 crate 编译
-- **前端**:React 19 + TypeScript + Vite 8
-- **UI**:Tailwind v4 + shadcn/ui(new-york)
-- **包管理**:pnpm
+- Drag & drop or paste input; switching tabs keeps your content
+- Lazy computation — only the active tab runs, large files stay snappy
+- Light / dark / system theme · mobile responsive · offline-capable after first load
 
-## 本地开发
+## Tech Stack
 
-前置:Node ≥ 20、pnpm ≥ 11、Rust stable + `wasm32-unknown-unknown` target、`wasm-pack`。
+- **WASM engine**: [subtitler 2.10.0](https://crates.io/crates/subtitler) via a thin wrapper crate (`wasm/`)
+- **Frontend**: React 19 + TypeScript + Vite 8
+- **UI**: Tailwind v4 + shadcn/ui (new-york) · **i18n**: react-i18next
+- **Package manager**: pnpm
+
+## Local Development
+
+Prerequisites: Node ≥ 20, pnpm ≥ 11, Rust stable with the `wasm32-unknown-unknown` target, and `wasm-pack`.
 
 ```bash
-# 安装 wasm target 和 wasm-pack(一次性)
+# One-time setup
 rustup target add wasm32-unknown-unknown
 cargo install wasm-pack
 
-# 安装依赖
+# Install dependencies
 pnpm install
 
-# 首次 / 修改 wasm 后构建 pkg
+# Build the WASM pkg (first time, or after changing wasm/)
 pnpm build:wasm
 
-# 启动开发服务器
-pnpm dev
-# → http://localhost:5173
+# Start the dev server
+pnpm dev          # → http://localhost:5173
 
-# 验证(typecheck + 生产构建)
+# Verify (typecheck + production build)
 pnpm verify
 ```
 
-WASM 单元测试(9 个):
+WASM unit tests (24):
 
 ```bash
 cd wasm && wasm-pack test --node --lib
 ```
 
-## 部署(GitHub Pages)
+## Localization
 
-部署由 **tag 触发**,不是每次 main push:
+UI strings live in `src/i18n/locales/{code}.json` (one file per language, all keyed against `en.json`). The language registry is `src/i18n/languages.ts`.
 
-- **main push / PR**:只跑 CI 测试(build-wasm + test-wasm + typecheck),不部署
-- **打 tag**(如 `v0.1.0`):跑测试 + 部署到 GitHub Pages
+**To add a language (2 steps):**
 
-打 tag 部署的流程:
+1. Create `src/i18n/locales/{code}.json` — copy `en.json` and translate the values (keys stay in English)
+2. Register it in `src/i18n/languages.ts`: add `{ code, nativeName, dir }` to `SUPPORTED_LANGUAGES`
 
-1. 构建 wasm pkg(缓存 Rust 编译产物)
-2. 跑 wasm 单元测试
-3. typecheck + 生产构建
-4. 部署到 GitHub Pages
+The language dropdown renders from the registry automatically. Set `dir: "rtl"` for right-to-left languages — `<html dir>`, layout mirroring, and content direction are handled for you.
 
-**线上地址**:<https://subtitle-rs.github.io/subtitle-format-conversion/>
-
-### 发版步骤
+All locale files must have identical key sets; check parity with:
 
 ```bash
-# 1. 确保 main 上的代码已通过 CI
+node -e "const fs=require('fs');const flat=(o,p='')=>Object.entries(o).flatMap(([k,v])=>typeof v==='object'?flat(v,p+k+'.'):[p+k]);const en=new Set(flat(JSON.parse(fs.readFileSync('src/i18n/locales/en.json','utf8'))));for(const f of fs.readdirSync('src/i18n/locales')){const k=new Set(flat(JSON.parse(fs.readFileSync('src/i18n/locales/'+f,'utf8'))));const m=[...en].filter(x=>!k.has(x)),e=[...k].filter(x=>!en.has(x));if(m.length||e.length)console.log(f,'MISSING:',m,'EXTRA:',e);else console.log(f,'✓')}"
+```
+
+## Deployment (GitHub Pages)
+
+Deployment is **tag-triggered**, not on every main push:
+
+- **main push / PR**: CI tests only (build-wasm + test-wasm + typecheck), no deploy
+- **tag push** (e.g. `v0.5.0`): tests + deploy to GitHub Pages
+
+The deploy pipeline: build wasm pkg (cached) → wasm unit tests → typecheck + production build → Pages.
+
+**Live at**: <https://subtitle-rs.github.io/subtitle-format-conversion/>
+
+### Release steps
+
+```bash
 git checkout main && git pull
-
-# 2. 打 tag(语义化版本)
-git tag v0.1.0
-git push origin v0.1.0
-
-# 3. 到 Actions tab 观察 deploy job,完成后访问部署 URL
+git tag v0.6.0            # semver
+git push origin v0.6.0    # watch the deploy in the Actions tab
 ```
 
-### 首次配置(只需一次)
+### First-time setup (once)
 
-仓库 **Settings → Pages → Build and deployment → Source** 选择 **"GitHub Actions"**(不是 "Deploy from a branch")。
+In the repo **Settings → Pages → Build and deployment → Source**, select **"GitHub Actions"** (not "Deploy from a branch").
 
-配置完成后,打 tag 即自动部署。PR 和 main push 只触发测试。
+### `base` path note
 
-### `base` 路径说明
+Pages serves the app under `/subtitle-format-conversion/`, so Vite's `base` must match. It's driven by the `BASE_PATH` env var:
 
-因为 Pages 部署在 `/subtitle-format-conversion/` 子路径下,Vite 的 `base` 需要匹配。本仓库用环境变量 `BASE_PATH` 控制:
+- Local `pnpm dev` / `pnpm build`: `base = "/"` (default)
+- CI deploy: injects `BASE_PATH=/subtitle-format-conversion/`
 
-- 本地 `pnpm dev` / `pnpm build`:`base = "/"`(默认)
-- CI 部署:注入 `BASE_PATH=/subtitle-format-conversion/`
+To change the deploy path (custom domain or repo rename), update `env.BASE_PATH` in `.github/workflows/ci.yml`.
 
-如需改部署路径(如自定义域名或仓库名变更),同步修改:
-- `.github/workflows/ci.yml` 的 `env.BASE_PATH`
-- 仓库 Settings → Pages 配置
-
-## 目录结构
+## Project Layout
 
 ```
-├── wasm/              # WASM 薄包装 crate(subtitler path 依赖)
+├── wasm/              # Thin WASM wrapper crate around subtitler
 ├── src/
-│   ├── lib/           # WASM 封装 + 格式元数据
-│   ├── hooks/         # useSubtitleConvert(debounce 状态机)
-│   └── components/    # 业务组件 + shadcn ui/
-├── pkg/               # wasm-pack 产物(gitignored)
+│   ├── i18n/          # Language registry + 14 locale files
+│   ├── lib/           # Typed WASM wrappers + format metadata
+│   ├── hooks/         # Per-tool hooks (debounce, lazy, button-triggered)
+│   └── components/    # Tool tabs, panels, shadcn ui/
+├── pkg/               # wasm-pack output (gitignored)
 └── .github/workflows/ci.yml
 ```
 
 ## License
 
-Apache-2.0(跟随 subtitler)
+Apache-2.0 (same as subtitler)
