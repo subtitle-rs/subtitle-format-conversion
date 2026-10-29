@@ -1,85 +1,85 @@
 {
   "app": {
-    "name": "Subtitle Workbench",
-    "title": "Subtitle Workbench — Free Online Subtitle Converter"
+    "name": "Untertitel-Werkstatt",
+    "title": "Untertitel-Werkstatt — kostenloser Online-Untertitel-Konverter"
   },
   "nav": {
-    "convert": "Convert",
-    "validate": "Validate",
-    "normalize": "Normalize",
-    "repair": "Repair",
+    "convert": "Konvertieren",
+    "validate": "Prüfen",
+    "normalize": "Bereinigen",
+    "repair": "Reparieren",
     "info": "Info"
   },
   "common": {
-    "copy": "Copy",
-    "copied": "Copied",
-    "download": "Download",
-    "count_subtitles": "{{count}} subtitles",
-    "issue_count": "{{count}} issues",
-    "local_badge": "Runs locally",
-    "local_tooltip": "Files never leave your browser — nothing is uploaded",
-    "loading_engine": "Loading subtitle engine...",
-    "engine_error": "Failed to load engine",
-    "retry_reload": "Reload",
-    "char_count": "{{count}} chars",
-    "large_file_warn": "Large file — rendering may be slow"
+    "copy": "Kopieren",
+    "copied": "Kopiert",
+    "download": "Herunterladen",
+    "count_subtitles": "{{count}} Untertitel",
+    "issue_count": "{{count}} Probleme",
+    "local_badge": "Lokale Verarbeitung",
+    "local_tooltip": "Dateien verlassen niemals Ihren Browser — kein Upload",
+    "loading_engine": "Untertitel-Engine wird geladen...",
+    "engine_error": "Engine konnte nicht geladen werden",
+    "retry_reload": "Neu laden",
+    "char_count": "{{count}} Zeichen",
+    "large_file_warn": "Große Datei — Darstellung kann langsam sein"
   },
   "tool": {
     "input": {
-      "title": "Input",
-      "tab_upload": "Upload file",
-      "tab_paste": "Paste text",
-      "drop_hint": "Drag a subtitle file here, or click to choose",
-      "drop_formats": "Supports .srt / .vtt / .ass / .sub / .ttml and more",
-      "paste_placeholder": "Paste subtitle content..."
+      "title": "Eingabe",
+      "tab_upload": "Datei hochladen",
+      "tab_paste": "Text einfügen",
+      "drop_hint": "Untertiteldatei hierher ziehen oder klicken zum Auswählen",
+      "drop_formats": "Unterstützt .srt / .vtt / .ass / .sub / .ttml und mehr",
+      "paste_placeholder": "Untertitel-Inhalt einfügen..."
     },
     "convert": {
-      "source": "Source",
-      "target": "Target",
-      "undetected_select": "Not recognized — pick one",
-      "result_title": "Result · {{format}}",
-      "placeholder": "Conversion result will appear here after you enter subtitles",
-      "failed": "Conversion failed"
+      "source": "Quelle",
+      "target": "Ziel",
+      "undetected_select": "Nicht erkannt — bitte wählen",
+      "result_title": "Ergebnis · {{format}}",
+      "placeholder": "Das Konvertierungsergebnis erscheint hier",
+      "failed": "Konvertierung fehlgeschlagen"
     },
     "validate": {
-      "placeholder": "Validation results will appear here after you enter subtitles",
-      "failed": "Validation failed",
-      "no_issues": "No issues found"
+      "placeholder": "Prüfergebnisse erscheinen hier",
+      "failed": "Prüfung fehlgeschlagen",
+      "no_issues": "Keine Probleme gefunden"
     },
     "normalize": {
-      "title": "Normalize Text",
-      "strip_tags": "Strip HTML/ASS tags",
-      "run": "Normalize",
-      "placeholder": "Click \"Normalize\" to process subtitles",
-      "failed": "Normalization failed:"
+      "title": "Textbereinigung",
+      "strip_tags": "HTML/ASS-Tags entfernen",
+      "run": "Bereinigen",
+      "placeholder": "Klicken Sie auf „Bereinigen“, um Untertitel zu verarbeiten",
+      "failed": "Bereinigung fehlgeschlagen:"
     },
     "repair": {
-      "title": "Repair Subtitles",
-      "min_gap": "Enforce minimum gap",
-      "merge_dup": "Merge duplicate lines, gap ≤",
-      "rollup": "Roll-up repair (merge adjacent identical lines)",
-      "edl_title": "Shot-change rules (Netflix delivery)",
-      "edl_pick": "Choose EDL",
-      "edl_loaded": "{{name}} · {{count}} cuts",
-      "edl_failed": "EDL parse failed:",
-      "fps": "Frame rate",
-      "before_frames": "Keep",
-      "after_frames_sep": "frames before · keep",
-      "frames": "frames after",
-      "run": "Apply repairs",
-      "placeholder": "Pick repairs, then click \"Apply repairs\"",
-      "failed": "Repair failed:",
-      "count_change": "{{before}} → {{after}} subtitles"
+      "title": "Untertitel reparieren",
+      "min_gap": "Mindestabstand erzwingen",
+      "merge_dup": "Duplikate zusammenführen, Abstand ≤",
+      "rollup": "Roll-up-Reparatur (benachbarte identische Zeilen zusammenführen)",
+      "edl_title": "Schnellwechsel-Regeln (Netflix-Auslieferung)",
+      "edl_pick": "EDL wählen",
+      "edl_loaded": "{{name}} · {{count}} Schnitte",
+      "edl_failed": "EDL-Analyse fehlgeschlagen:",
+      "fps": "Bildrate",
+      "before_frames": "Vor Schnitt",
+      "after_frames_sep": "Bilder · nach Schnitt",
+      "frames": "Bilder",
+      "run": "Reparaturen anwenden",
+      "placeholder": "Reparaturen auswählen, dann auf „Anwenden“ klicken",
+      "failed": "Reparatur fehlgeschlagen:",
+      "count_change": "{{before}} → {{after}} Untertitel"
     },
     "info": {
-      "title": "Subtitle Info",
-      "placeholder": "Subtitle info will appear here after you enter subtitles",
-      "failed": "Cannot parse subtitles:",
+      "title": "Untertitel-Info",
+      "placeholder": "Informationen erscheinen hier",
+      "failed": "Untertitel konnten nicht geparst werden:",
       "row_format": "Format",
-      "row_count": "Subtitle count",
-      "row_duration": "Total duration",
-      "row_first": "First timestamp",
-      "row_last": "Last timestamp"
+      "row_count": "Anzahl Untertitel",
+      "row_duration": "Gesamtdauer",
+      "row_first": "Erster Zeitstempel",
+      "row_last": "Letzter Zeitstempel"
     }
   },
   "format": {
@@ -95,32 +95,32 @@
     "itt": "iTunes TT (ITT)",
     "whisper": "Whisper JSON",
     "sbv": "YouTube SBV",
-    "lrc": "LRC Lyrics",
+    "lrc": "LRC-Liedtexte",
     "sami": "SAMI",
     "mpl2": "MPL2",
     "scc": "SCC (Broadcast)",
     "ebu_stl": "EBU STL (Broadcast)"
   },
   "guideline": {
-    "basic": "Basic",
-    "netflix": "Netflix delivery spec",
+    "basic": "Einfach",
+    "netflix": "Netflix-Spezifikation",
     "bbc": "BBC",
     "ted": "TED",
     "ard": "ARD/ORF/SRF/ZDF",
     "channel4": "Channel 4"
   },
   "footer": {
-    "supported": "Supported formats:",
-    "based_on_prefix": "Built on the",
-    "based_on_suffix": "Rust library · compiled to WebAssembly · runs 100% in your browser"
+    "supported": "Unterstützte Formate:",
+    "based_on_prefix": "Basiert auf der",
+    "based_on_suffix": "Bibliothek (Rust) · kompiliert zu WebAssembly · läuft zu 100 % im Browser"
   },
   "theme": {
-    "light": "Light",
-    "dark": "Dark",
+    "light": "Hell",
+    "dark": "Dunkel",
     "system": "System",
-    "toggle_title": "Switch theme"
+    "toggle_title": "Design wechseln"
   },
   "lang": {
-    "switch": "Switch language"
+    "switch": "Sprache wechseln"
   }
 }

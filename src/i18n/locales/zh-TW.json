@@ -1,85 +1,85 @@
 {
   "app": {
-    "name": "Subtitle Workbench",
-    "title": "Subtitle Workbench — Free Online Subtitle Converter"
+    "name": "字幕工具臺",
+    "title": "字幕工具臺 — 免費線上字幕格式轉換"
   },
   "nav": {
-    "convert": "Convert",
-    "validate": "Validate",
-    "normalize": "Normalize",
-    "repair": "Repair",
-    "info": "Info"
+    "convert": "格式轉換",
+    "validate": "品質校驗",
+    "normalize": "文字正規化",
+    "repair": "修復",
+    "info": "字幕資訊"
   },
   "common": {
-    "copy": "Copy",
-    "copied": "Copied",
-    "download": "Download",
-    "count_subtitles": "{{count}} subtitles",
-    "issue_count": "{{count}} issues",
-    "local_badge": "Runs locally",
-    "local_tooltip": "Files never leave your browser — nothing is uploaded",
-    "loading_engine": "Loading subtitle engine...",
-    "engine_error": "Failed to load engine",
-    "retry_reload": "Reload",
-    "char_count": "{{count}} chars",
-    "large_file_warn": "Large file — rendering may be slow"
+    "copy": "複製",
+    "copied": "已複製",
+    "download": "下載",
+    "count_subtitles": "{{count}} 條字幕",
+    "issue_count": "{{count}} 個問題",
+    "local_badge": "純本機處理",
+    "local_tooltip": "檔案不離開你的瀏覽器,無需上傳",
+    "loading_engine": "正在載入字幕引擎...",
+    "engine_error": "引擎載入失敗",
+    "retry_reload": "重新載入",
+    "char_count": "{{count}} 字元",
+    "large_file_warn": "檔案較大,可能影響渲染"
   },
   "tool": {
     "input": {
-      "title": "Input",
-      "tab_upload": "Upload file",
-      "tab_paste": "Paste text",
-      "drop_hint": "Drag a subtitle file here, or click to choose",
-      "drop_formats": "Supports .srt / .vtt / .ass / .sub / .ttml and more",
-      "paste_placeholder": "Paste subtitle content..."
+      "title": "輸入",
+      "tab_upload": "上傳檔案",
+      "tab_paste": "貼上文字",
+      "drop_hint": "拖曳字幕檔案到此處,或點擊選擇",
+      "drop_formats": "支援 .srt / .vtt / .ass / .sub / .ttml 等格式",
+      "paste_placeholder": "貼上字幕內容..."
     },
     "convert": {
-      "source": "Source",
-      "target": "Target",
-      "undetected_select": "Not recognized — pick one",
-      "result_title": "Result · {{format}}",
-      "placeholder": "Conversion result will appear here after you enter subtitles",
-      "failed": "Conversion failed"
+      "source": "來源格式",
+      "target": "目標格式",
+      "undetected_select": "無法識別,請選擇",
+      "result_title": "轉換結果 · {{format}}",
+      "placeholder": "輸入字幕內容後,轉換結果將顯示在此",
+      "failed": "轉換失敗"
     },
     "validate": {
-      "placeholder": "Validation results will appear here after you enter subtitles",
-      "failed": "Validation failed",
-      "no_issues": "No issues found"
+      "placeholder": "輸入字幕後,品質校驗結果將顯示在此",
+      "failed": "校驗失敗",
+      "no_issues": "未發現問題"
     },
     "normalize": {
-      "title": "Normalize Text",
-      "strip_tags": "Strip HTML/ASS tags",
-      "run": "Normalize",
-      "placeholder": "Click \"Normalize\" to process subtitles",
-      "failed": "Normalization failed:"
+      "title": "文字正規化",
+      "strip_tags": "剝離 HTML/ASS 標籤",
+      "run": "正規化",
+      "placeholder": "點擊「正規化」處理字幕",
+      "failed": "正規化失敗:"
     },
     "repair": {
-      "title": "Repair Subtitles",
-      "min_gap": "Enforce minimum gap",
-      "merge_dup": "Merge duplicate lines, gap ≤",
-      "rollup": "Roll-up repair (merge adjacent identical lines)",
-      "edl_title": "Shot-change rules (Netflix delivery)",
-      "edl_pick": "Choose EDL",
-      "edl_loaded": "{{name}} · {{count}} cuts",
-      "edl_failed": "EDL parse failed:",
-      "fps": "Frame rate",
-      "before_frames": "Keep",
-      "after_frames_sep": "frames before · keep",
-      "frames": "frames after",
-      "run": "Apply repairs",
-      "placeholder": "Pick repairs, then click \"Apply repairs\"",
-      "failed": "Repair failed:",
-      "count_change": "{{before}} → {{after}} subtitles"
+      "title": "字幕修復",
+      "min_gap": "保證最小間隔",
+      "merge_dup": "合併重複文字 gap ≤",
+      "rollup": "Roll-up 修復(合併相鄰相同文字)",
+      "edl_title": "鏡頭切換規則(Netflix 出海)",
+      "edl_pick": "選擇 EDL",
+      "edl_loaded": "{{name}} · {{count}} 個切鏡點",
+      "edl_failed": "EDL 解析失敗:",
+      "fps": "影格率",
+      "before_frames": "切前留",
+      "after_frames_sep": "影格 · 切後留",
+      "frames": "影格",
+      "run": "執行修復",
+      "placeholder": "勾選修復項後點擊「執行修復」",
+      "failed": "修復失敗:",
+      "count_change": "字幕 {{before}} 條 → {{after}} 條"
     },
     "info": {
-      "title": "Subtitle Info",
-      "placeholder": "Subtitle info will appear here after you enter subtitles",
-      "failed": "Cannot parse subtitles:",
-      "row_format": "Format",
-      "row_count": "Subtitle count",
-      "row_duration": "Total duration",
-      "row_first": "First timestamp",
-      "row_last": "Last timestamp"
+      "title": "字幕資訊",
+      "placeholder": "輸入字幕後,字幕資訊將顯示在此",
+      "failed": "無法解析字幕:",
+      "row_format": "格式",
+      "row_count": "字幕條數",
+      "row_duration": "總時長",
+      "row_first": "首時間戳",
+      "row_last": "末時間戳"
     }
   },
   "format": {
@@ -95,32 +95,32 @@
     "itt": "iTunes TT (ITT)",
     "whisper": "Whisper JSON",
     "sbv": "YouTube SBV",
-    "lrc": "LRC Lyrics",
+    "lrc": "LRC 歌詞",
     "sami": "SAMI",
     "mpl2": "MPL2",
-    "scc": "SCC (Broadcast)",
-    "ebu_stl": "EBU STL (Broadcast)"
+    "scc": "SCC (廣播)",
+    "ebu_stl": "EBU STL (廣播)"
   },
   "guideline": {
-    "basic": "Basic",
-    "netflix": "Netflix delivery spec",
+    "basic": "基礎",
+    "netflix": "Netflix 出海規範",
     "bbc": "BBC",
     "ted": "TED",
     "ard": "ARD/ORF/SRF/ZDF",
     "channel4": "Channel 4"
   },
   "footer": {
-    "supported": "Supported formats:",
-    "based_on_prefix": "Built on the",
-    "based_on_suffix": "Rust library · compiled to WebAssembly · runs 100% in your browser"
+    "supported": "支援的字幕格式:",
+    "based_on_prefix": "基於",
+    "based_on_suffix": "Rust 函式庫 · 編譯為 WebAssembly · 100% 瀏覽器內執行"
   },
   "theme": {
-    "light": "Light",
-    "dark": "Dark",
-    "system": "System",
-    "toggle_title": "Switch theme"
+    "light": "亮色",
+    "dark": "暗色",
+    "system": "跟隨系統",
+    "toggle_title": "切換主題"
   },
   "lang": {
-    "switch": "Switch language"
+    "switch": "切換語言"
   }
 }

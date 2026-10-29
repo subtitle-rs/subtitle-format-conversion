@@ -1,85 +1,85 @@
 {
   "app": {
-    "name": "Subtitle Workbench",
-    "title": "Subtitle Workbench — Free Online Subtitle Converter"
+    "name": "محرر الترجمات",
+    "title": "محرر الترجمات — محوّل ترجمات مجاني عبر الإنترنت"
   },
   "nav": {
-    "convert": "Convert",
-    "validate": "Validate",
-    "normalize": "Normalize",
-    "repair": "Repair",
-    "info": "Info"
+    "convert": "تحويل",
+    "validate": "فحص",
+    "normalize": "تنظيف",
+    "repair": "إصلاح",
+    "info": "معلومات"
   },
   "common": {
-    "copy": "Copy",
-    "copied": "Copied",
-    "download": "Download",
-    "count_subtitles": "{{count}} subtitles",
-    "issue_count": "{{count}} issues",
-    "local_badge": "Runs locally",
-    "local_tooltip": "Files never leave your browser — nothing is uploaded",
-    "loading_engine": "Loading subtitle engine...",
-    "engine_error": "Failed to load engine",
-    "retry_reload": "Reload",
-    "char_count": "{{count}} chars",
-    "large_file_warn": "Large file — rendering may be slow"
+    "copy": "نسخ",
+    "copied": "تم النسخ",
+    "download": "تنزيل",
+    "count_subtitles": "{{count}} سطر ترجمة",
+    "issue_count": "{{count}} مشكلات",
+    "local_badge": "معالجة محلية",
+    "local_tooltip": "الملفات لا تغادر متصفحك أبدًا — لا يتم رفع أي شيء",
+    "loading_engine": "جارٍ تحميل محرك الترجمات...",
+    "engine_error": "فشل تحميل المحرك",
+    "retry_reload": "إعادة التحميل",
+    "char_count": "{{count}} حرفًا",
+    "large_file_warn": "ملف كبير — قد يتباطأ العرض"
   },
   "tool": {
     "input": {
-      "title": "Input",
-      "tab_upload": "Upload file",
-      "tab_paste": "Paste text",
-      "drop_hint": "Drag a subtitle file here, or click to choose",
-      "drop_formats": "Supports .srt / .vtt / .ass / .sub / .ttml and more",
-      "paste_placeholder": "Paste subtitle content..."
+      "title": "الإدخال",
+      "tab_upload": "رفع ملف",
+      "tab_paste": "لصق نص",
+      "drop_hint": "اسحب ملف ترجمة إلى هنا، أو انقر للاختيار",
+      "drop_formats": "يدعم .srt / .vtt / .ass / .sub / .ttml وغيرها",
+      "paste_placeholder": "الصق محتوى الترجمة..."
     },
     "convert": {
-      "source": "Source",
-      "target": "Target",
-      "undetected_select": "Not recognized — pick one",
-      "result_title": "Result · {{format}}",
-      "placeholder": "Conversion result will appear here after you enter subtitles",
-      "failed": "Conversion failed"
+      "source": "المصدر",
+      "target": "الهدف",
+      "undetected_select": "لم يتم التعرف — اختر يدويًا",
+      "result_title": "النتيجة · {{format}}",
+      "placeholder": "ستظهر نتيجة التحويل هنا بعد إدخال الترجمات",
+      "failed": "فشل التحويل"
     },
     "validate": {
-      "placeholder": "Validation results will appear here after you enter subtitles",
-      "failed": "Validation failed",
-      "no_issues": "No issues found"
+      "placeholder": "ستظهر نتائج الفحص هنا بعد إدخال الترجمات",
+      "failed": "فشل الفحص",
+      "no_issues": "لا توجد مشكلات"
     },
     "normalize": {
-      "title": "Normalize Text",
-      "strip_tags": "Strip HTML/ASS tags",
-      "run": "Normalize",
-      "placeholder": "Click \"Normalize\" to process subtitles",
-      "failed": "Normalization failed:"
+      "title": "تنظيف النص",
+      "strip_tags": "إزالة وسوم HTML/ASS",
+      "run": "تنظيف",
+      "placeholder": "انقر «تنظيف» لمعالجة الترجمات",
+      "failed": "فشل التنظيف:"
     },
     "repair": {
-      "title": "Repair Subtitles",
-      "min_gap": "Enforce minimum gap",
-      "merge_dup": "Merge duplicate lines, gap ≤",
-      "rollup": "Roll-up repair (merge adjacent identical lines)",
-      "edl_title": "Shot-change rules (Netflix delivery)",
-      "edl_pick": "Choose EDL",
-      "edl_loaded": "{{name}} · {{count}} cuts",
-      "edl_failed": "EDL parse failed:",
-      "fps": "Frame rate",
-      "before_frames": "Keep",
-      "after_frames_sep": "frames before · keep",
-      "frames": "frames after",
-      "run": "Apply repairs",
-      "placeholder": "Pick repairs, then click \"Apply repairs\"",
-      "failed": "Repair failed:",
-      "count_change": "{{before}} → {{after}} subtitles"
+      "title": "إصلاح الترجمات",
+      "min_gap": "فرض فاصل زمني أدنى",
+      "merge_dup": "دمج الأسطر المكررة، فاصل ≤",
+      "rollup": "إصلاح Roll-up (دمج الأسطر المتطابقة المتجاورة)",
+      "edl_title": "قواعد نقاط القطع (تسليم Netflix)",
+      "edl_pick": "اختر ملف EDL",
+      "edl_loaded": "{{name}} · {{count}} نقطة قطع",
+      "edl_failed": "فشل تحليل EDL:",
+      "fps": "معدل الإطارات",
+      "before_frames": "إطار احتياطي قبل",
+      "after_frames_sep": "إطار · احتياطي بعد",
+      "frames": "إطار",
+      "run": "تطبيق الإصلاحات",
+      "placeholder": "اختر الإصلاحات ثم انقر «تطبيق»",
+      "failed": "فشل الإصلاح:",
+      "count_change": "الترجمات: {{before}} → {{after}}"
     },
     "info": {
-      "title": "Subtitle Info",
-      "placeholder": "Subtitle info will appear here after you enter subtitles",
-      "failed": "Cannot parse subtitles:",
-      "row_format": "Format",
-      "row_count": "Subtitle count",
-      "row_duration": "Total duration",
-      "row_first": "First timestamp",
-      "row_last": "Last timestamp"
+      "title": "معلومات الترجمة",
+      "placeholder": "ستظهر المعلومات هنا بعد إدخال الترجمات",
+      "failed": "تعذر تحليل الترجمات:",
+      "row_format": "الصيغة",
+      "row_count": "عدد الأسطر",
+      "row_duration": "المدة الإجمالية",
+      "row_first": "أول طابع زمني",
+      "row_last": "آخر طابع زمني"
     }
   },
   "format": {
@@ -95,32 +95,32 @@
     "itt": "iTunes TT (ITT)",
     "whisper": "Whisper JSON",
     "sbv": "YouTube SBV",
-    "lrc": "LRC Lyrics",
+    "lrc": "كلمات LRC",
     "sami": "SAMI",
     "mpl2": "MPL2",
-    "scc": "SCC (Broadcast)",
-    "ebu_stl": "EBU STL (Broadcast)"
+    "scc": "SCC (بث)",
+    "ebu_stl": "EBU STL (بث)"
   },
   "guideline": {
-    "basic": "Basic",
-    "netflix": "Netflix delivery spec",
+    "basic": "أساسي",
+    "netflix": "مواصفات Netflix",
     "bbc": "BBC",
     "ted": "TED",
     "ard": "ARD/ORF/SRF/ZDF",
     "channel4": "Channel 4"
   },
   "footer": {
-    "supported": "Supported formats:",
-    "based_on_prefix": "Built on the",
-    "based_on_suffix": "Rust library · compiled to WebAssembly · runs 100% in your browser"
+    "supported": "الصيغ المدعومة:",
+    "based_on_prefix": "مبني على مكتبة",
+    "based_on_suffix": "Rust · مُجمَّع إلى WebAssembly · يعمل 100% داخل متصفحك"
   },
   "theme": {
-    "light": "Light",
-    "dark": "Dark",
-    "system": "System",
-    "toggle_title": "Switch theme"
+    "light": "فاتح",
+    "dark": "داكن",
+    "system": "حسب النظام",
+    "toggle_title": "تبديل المظهر"
   },
   "lang": {
-    "switch": "Switch language"
+    "switch": "تغيير اللغة"
   }
 }

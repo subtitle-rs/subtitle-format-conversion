@@ -1,85 +1,85 @@
 {
   "app": {
-    "name": "Subtitle Workbench",
-    "title": "Subtitle Workbench — Free Online Subtitle Converter"
+    "name": "סדנת כתוביות",
+    "title": "סדנת כתוביות — ממיר כתוביות מקוון חינמי"
   },
   "nav": {
-    "convert": "Convert",
-    "validate": "Validate",
-    "normalize": "Normalize",
-    "repair": "Repair",
-    "info": "Info"
+    "convert": "המרה",
+    "validate": "בדיקה",
+    "normalize": "ניקוי",
+    "repair": "תיקון",
+    "info": "מידע"
   },
   "common": {
-    "copy": "Copy",
-    "copied": "Copied",
-    "download": "Download",
-    "count_subtitles": "{{count}} subtitles",
-    "issue_count": "{{count}} issues",
-    "local_badge": "Runs locally",
-    "local_tooltip": "Files never leave your browser — nothing is uploaded",
-    "loading_engine": "Loading subtitle engine...",
-    "engine_error": "Failed to load engine",
-    "retry_reload": "Reload",
-    "char_count": "{{count}} chars",
-    "large_file_warn": "Large file — rendering may be slow"
+    "copy": "העתקה",
+    "copied": "הועתק",
+    "download": "הורדה",
+    "count_subtitles": "{{count}} שורות כתוביות",
+    "issue_count": "{{count}} בעיות",
+    "local_badge": "עיבוד מקומי",
+    "local_tooltip": "הקבצים לעולם לא עוזבים את הדפדפן — שום דבר לא נשלח לשרת",
+    "loading_engine": "טוען את מנוע הכתוביות...",
+    "engine_error": "טעינת המנוע נכשלה",
+    "retry_reload": "טעינה מחדש",
+    "char_count": "{{count}} תווים",
+    "large_file_warn": "קובץ גדול — התצוגה עלולה להיות איטית"
   },
   "tool": {
     "input": {
-      "title": "Input",
-      "tab_upload": "Upload file",
-      "tab_paste": "Paste text",
-      "drop_hint": "Drag a subtitle file here, or click to choose",
-      "drop_formats": "Supports .srt / .vtt / .ass / .sub / .ttml and more",
-      "paste_placeholder": "Paste subtitle content..."
+      "title": "קלט",
+      "tab_upload": "העלאת קובץ",
+      "tab_paste": "הדבקת טקסט",
+      "drop_hint": "גררו קובץ כתוביות לכאן, או לחצו לבחירה",
+      "drop_formats": "תמיכה ב-.srt / .vtt / .ass / .sub / .ttml ועוד",
+      "paste_placeholder": "הדביקו את תוכן הכתוביות..."
     },
     "convert": {
-      "source": "Source",
-      "target": "Target",
-      "undetected_select": "Not recognized — pick one",
-      "result_title": "Result · {{format}}",
-      "placeholder": "Conversion result will appear here after you enter subtitles",
-      "failed": "Conversion failed"
+      "source": "מקור",
+      "target": "יעד",
+      "undetected_select": "לא זוהה — בחרו ידנית",
+      "result_title": "תוצאה · {{format}}",
+      "placeholder": "תוצאת ההמרה תופיע כאן לאחר הזנת כתוביות",
+      "failed": "ההמרה נכשלה"
     },
     "validate": {
-      "placeholder": "Validation results will appear here after you enter subtitles",
-      "failed": "Validation failed",
-      "no_issues": "No issues found"
+      "placeholder": "תוצאות הבדיקה יופיעו כאן לאחר הזנת כתוביות",
+      "failed": "הבדיקה נכשלה",
+      "no_issues": "לא נמצאו בעיות"
     },
     "normalize": {
-      "title": "Normalize Text",
-      "strip_tags": "Strip HTML/ASS tags",
-      "run": "Normalize",
-      "placeholder": "Click \"Normalize\" to process subtitles",
-      "failed": "Normalization failed:"
+      "title": "ניקוי טקסט",
+      "strip_tags": "הסרת תגי HTML/ASS",
+      "run": "ניקוי",
+      "placeholder": "לחצו «ניקוי» לעיבוד הכתוביות",
+      "failed": "הניקוי נכשל:"
     },
     "repair": {
-      "title": "Repair Subtitles",
-      "min_gap": "Enforce minimum gap",
-      "merge_dup": "Merge duplicate lines, gap ≤",
-      "rollup": "Roll-up repair (merge adjacent identical lines)",
-      "edl_title": "Shot-change rules (Netflix delivery)",
-      "edl_pick": "Choose EDL",
-      "edl_loaded": "{{name}} · {{count}} cuts",
-      "edl_failed": "EDL parse failed:",
-      "fps": "Frame rate",
-      "before_frames": "Keep",
-      "after_frames_sep": "frames before · keep",
-      "frames": "frames after",
-      "run": "Apply repairs",
-      "placeholder": "Pick repairs, then click \"Apply repairs\"",
-      "failed": "Repair failed:",
-      "count_change": "{{before}} → {{after}} subtitles"
+      "title": "תיקון כתוביות",
+      "min_gap": "אכיפת מרווח מינימלי",
+      "merge_dup": "מיזוג שורות כפולות, מרווח ≤",
+      "rollup": "תיקון Roll-up (מיזוג שורות זהות סמוכות)",
+      "edl_title": "כללי נקודות חיתוך (משלוח ל-Netflix)",
+      "edl_pick": "בחירת EDL",
+      "edl_loaded": "{{name}} · {{count}} נקודות חיתוך",
+      "edl_failed": "ניתוח ה-EDL נכשל:",
+      "fps": "קצב פריימים",
+      "before_frames": "שמירה לפני",
+      "after_frames_sep": "פריימים · אחרי",
+      "frames": "פריימים",
+      "run": "החלת תיקונים",
+      "placeholder": "בחרו תיקונים ולחצו «החלה»",
+      "failed": "התיקון נכשל:",
+      "count_change": "כתוביות: {{before}} ← {{after}}"
     },
     "info": {
-      "title": "Subtitle Info",
-      "placeholder": "Subtitle info will appear here after you enter subtitles",
-      "failed": "Cannot parse subtitles:",
-      "row_format": "Format",
-      "row_count": "Subtitle count",
-      "row_duration": "Total duration",
-      "row_first": "First timestamp",
-      "row_last": "Last timestamp"
+      "title": "מידע על הכתוביות",
+      "placeholder": "המידע יופיע כאן לאחר הזנת כתוביות",
+      "failed": "לא ניתן לנתח את הכתוביות:",
+      "row_format": "פורמט",
+      "row_count": "מספר שורות",
+      "row_duration": "משך כולל",
+      "row_first": "חותמת זמן ראשונה",
+      "row_last": "חותמת זמן אחרונה"
     }
   },
   "format": {
@@ -95,32 +95,32 @@
     "itt": "iTunes TT (ITT)",
     "whisper": "Whisper JSON",
     "sbv": "YouTube SBV",
-    "lrc": "LRC Lyrics",
+    "lrc": "מילים LRC",
     "sami": "SAMI",
     "mpl2": "MPL2",
-    "scc": "SCC (Broadcast)",
-    "ebu_stl": "EBU STL (Broadcast)"
+    "scc": "SCC (שידור)",
+    "ebu_stl": "EBU STL (שידור)"
   },
   "guideline": {
-    "basic": "Basic",
-    "netflix": "Netflix delivery spec",
+    "basic": "בסיסי",
+    "netflix": "תקן Netflix",
     "bbc": "BBC",
     "ted": "TED",
     "ard": "ARD/ORF/SRF/ZDF",
     "channel4": "Channel 4"
   },
   "footer": {
-    "supported": "Supported formats:",
-    "based_on_prefix": "Built on the",
-    "based_on_suffix": "Rust library · compiled to WebAssembly · runs 100% in your browser"
+    "supported": "פורמטים נתמכים:",
+    "based_on_prefix": "נבנה על ספריית",
+    "based_on_suffix": "Rust · מורכב ל-WebAssembly · פועל 100% בדפדפן שלכם"
   },
   "theme": {
-    "light": "Light",
-    "dark": "Dark",
-    "system": "System",
-    "toggle_title": "Switch theme"
+    "light": "בהיר",
+    "dark": "כהה",
+    "system": "לפי המערכת",
+    "toggle_title": "החלפת ערכת נושא"
   },
   "lang": {
-    "switch": "Switch language"
+    "switch": "החלפת שפה"
   }
 }

@@ -1,85 +1,85 @@
 {
   "app": {
-    "name": "Subtitle Workbench",
-    "title": "Subtitle Workbench — Free Online Subtitle Converter"
+    "name": "Мастер субтитров",
+    "title": "Мастер субтитров — бесплатный онлайн-конвертер субтитров"
   },
   "nav": {
-    "convert": "Convert",
-    "validate": "Validate",
-    "normalize": "Normalize",
-    "repair": "Repair",
-    "info": "Info"
+    "convert": "Конвертация",
+    "validate": "Проверка",
+    "normalize": "Нормализация",
+    "repair": "Исправление",
+    "info": "Информация"
   },
   "common": {
-    "copy": "Copy",
-    "copied": "Copied",
-    "download": "Download",
-    "count_subtitles": "{{count}} subtitles",
-    "issue_count": "{{count}} issues",
-    "local_badge": "Runs locally",
-    "local_tooltip": "Files never leave your browser — nothing is uploaded",
-    "loading_engine": "Loading subtitle engine...",
-    "engine_error": "Failed to load engine",
-    "retry_reload": "Reload",
-    "char_count": "{{count}} chars",
-    "large_file_warn": "Large file — rendering may be slow"
+    "copy": "Копировать",
+    "copied": "Скопировано",
+    "download": "Скачать",
+    "count_subtitles": "Субтитров: {{count}}",
+    "issue_count": "Проблем: {{count}}",
+    "local_badge": "Локальная обработка",
+    "local_tooltip": "Файлы не покидают ваш браузер — ничего не загружается на сервер",
+    "loading_engine": "Загрузка движка субтитров...",
+    "engine_error": "Не удалось загрузить движок",
+    "retry_reload": "Перезагрузить",
+    "char_count": "{{count}} симв.",
+    "large_file_warn": "Большой файл — отрисовка может замедлиться"
   },
   "tool": {
     "input": {
-      "title": "Input",
-      "tab_upload": "Upload file",
-      "tab_paste": "Paste text",
-      "drop_hint": "Drag a subtitle file here, or click to choose",
-      "drop_formats": "Supports .srt / .vtt / .ass / .sub / .ttml and more",
-      "paste_placeholder": "Paste subtitle content..."
+      "title": "Ввод",
+      "tab_upload": "Загрузить файл",
+      "tab_paste": "Вставить текст",
+      "drop_hint": "Перетащите файл субтитров сюда или нажмите для выбора",
+      "drop_formats": "Поддерживаются .srt / .vtt / .ass / .sub / .ttml и другие",
+      "paste_placeholder": "Вставьте содержимое субтитров..."
     },
     "convert": {
-      "source": "Source",
-      "target": "Target",
-      "undetected_select": "Not recognized — pick one",
-      "result_title": "Result · {{format}}",
-      "placeholder": "Conversion result will appear here after you enter subtitles",
-      "failed": "Conversion failed"
+      "source": "Источник",
+      "target": "Цель",
+      "undetected_select": "Не распознано — выберите",
+      "result_title": "Результат · {{format}}",
+      "placeholder": "Результат конвертации появится здесь после ввода субтитров",
+      "failed": "Ошибка конвертации"
     },
     "validate": {
-      "placeholder": "Validation results will appear here after you enter subtitles",
-      "failed": "Validation failed",
-      "no_issues": "No issues found"
+      "placeholder": "Результаты проверки появятся здесь после ввода субтитров",
+      "failed": "Ошибка проверки",
+      "no_issues": "Проблем не найдено"
     },
     "normalize": {
-      "title": "Normalize Text",
-      "strip_tags": "Strip HTML/ASS tags",
-      "run": "Normalize",
-      "placeholder": "Click \"Normalize\" to process subtitles",
-      "failed": "Normalization failed:"
+      "title": "Нормализация текста",
+      "strip_tags": "Удалить HTML/ASS-теги",
+      "run": "Нормализовать",
+      "placeholder": "Нажмите «Нормализовать» для обработки",
+      "failed": "Ошибка нормализации:"
     },
     "repair": {
-      "title": "Repair Subtitles",
-      "min_gap": "Enforce minimum gap",
-      "merge_dup": "Merge duplicate lines, gap ≤",
-      "rollup": "Roll-up repair (merge adjacent identical lines)",
-      "edl_title": "Shot-change rules (Netflix delivery)",
-      "edl_pick": "Choose EDL",
-      "edl_loaded": "{{name}} · {{count}} cuts",
-      "edl_failed": "EDL parse failed:",
-      "fps": "Frame rate",
-      "before_frames": "Keep",
-      "after_frames_sep": "frames before · keep",
-      "frames": "frames after",
-      "run": "Apply repairs",
-      "placeholder": "Pick repairs, then click \"Apply repairs\"",
-      "failed": "Repair failed:",
-      "count_change": "{{before}} → {{after}} subtitles"
+      "title": "Исправление субтитров",
+      "min_gap": "Минимальный интервал",
+      "merge_dup": "Объединять дубли, интервал ≤",
+      "rollup": "Roll-up: объединять соседние одинаковые строки",
+      "edl_title": "Правила склеек (сдача в Netflix)",
+      "edl_pick": "Выбрать EDL",
+      "edl_loaded": "{{name}} · склеек: {{count}}",
+      "edl_failed": "Ошибка разбора EDL:",
+      "fps": "Частота кадров",
+      "before_frames": "Отступ до",
+      "after_frames_sep": "кадров · отступ после",
+      "frames": "кадров",
+      "run": "Применить исправления",
+      "placeholder": "Выберите исправления и нажмите «Применить»",
+      "failed": "Ошибка исправления:",
+      "count_change": "Субтитры: {{before}} → {{after}}"
     },
     "info": {
-      "title": "Subtitle Info",
-      "placeholder": "Subtitle info will appear here after you enter subtitles",
-      "failed": "Cannot parse subtitles:",
-      "row_format": "Format",
-      "row_count": "Subtitle count",
-      "row_duration": "Total duration",
-      "row_first": "First timestamp",
-      "row_last": "Last timestamp"
+      "title": "О субтитрах",
+      "placeholder": "Информация появится здесь после ввода субтитров",
+      "failed": "Не удалось разобрать субтитры:",
+      "row_format": "Формат",
+      "row_count": "Кол-во строк",
+      "row_duration": "Общая длительность",
+      "row_first": "Первый таймкод",
+      "row_last": "Последний таймкод"
     }
   },
   "format": {
@@ -95,32 +95,32 @@
     "itt": "iTunes TT (ITT)",
     "whisper": "Whisper JSON",
     "sbv": "YouTube SBV",
-    "lrc": "LRC Lyrics",
+    "lrc": "Тексты LRC",
     "sami": "SAMI",
     "mpl2": "MPL2",
-    "scc": "SCC (Broadcast)",
-    "ebu_stl": "EBU STL (Broadcast)"
+    "scc": "SCC (вещание)",
+    "ebu_stl": "EBU STL (вещание)"
   },
   "guideline": {
-    "basic": "Basic",
-    "netflix": "Netflix delivery spec",
+    "basic": "Базовая",
+    "netflix": "Спецификация Netflix",
     "bbc": "BBC",
     "ted": "TED",
     "ard": "ARD/ORF/SRF/ZDF",
     "channel4": "Channel 4"
   },
   "footer": {
-    "supported": "Supported formats:",
-    "based_on_prefix": "Built on the",
-    "based_on_suffix": "Rust library · compiled to WebAssembly · runs 100% in your browser"
+    "supported": "Поддерживаемые форматы:",
+    "based_on_prefix": "Создано на основе библиотеки",
+    "based_on_suffix": "Rust · компилируется в WebAssembly · работает на 100% в браузере"
   },
   "theme": {
-    "light": "Light",
-    "dark": "Dark",
-    "system": "System",
-    "toggle_title": "Switch theme"
+    "light": "Светлая",
+    "dark": "Тёмная",
+    "system": "Как в системе",
+    "toggle_title": "Сменить тему"
   },
   "lang": {
-    "switch": "Switch language"
+    "switch": "Сменить язык"
   }
 }
