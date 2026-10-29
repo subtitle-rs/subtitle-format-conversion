@@ -1,0 +1,126 @@
+{
+  "app": {
+    "name": "자막 작업실",
+    "title": "자막 작업실 — 무료 온라인 자막 변환기"
+  },
+  "nav": {
+    "convert": "형식 변환",
+    "validate": "품질 검사",
+    "normalize": "텍스트 정규화",
+    "repair": "복구",
+    "info": "자막 정보"
+  },
+  "common": {
+    "copy": "복사",
+    "copied": "복사됨",
+    "download": "다운로드",
+    "count_subtitles": "자막 {{count}}개",
+    "issue_count": "문제 {{count}}개",
+    "local_badge": "로컬 처리",
+    "local_tooltip": "파일은 브라우저를 떠나지 않습니다 — 업로드 없음",
+    "loading_engine": "자막 엔진 로드 중...",
+    "engine_error": "엔진 로드 실패",
+    "retry_reload": "새로고침",
+    "char_count": "{{count}}자",
+    "large_file_warn": "파일이 커서 렌더링이 느려질 수 있습니다"
+  },
+  "tool": {
+    "input": {
+      "title": "입력",
+      "tab_upload": "파일 업로드",
+      "tab_paste": "텍스트 붙여넣기",
+      "drop_hint": "자막 파일을 여기로 끌어다 놓거나 클릭해서 선택하세요",
+      "drop_formats": ".srt / .vtt / .ass / .sub / .ttml 등 지원",
+      "paste_placeholder": "자막 내용을 붙여넣으세요..."
+    },
+    "convert": {
+      "source": "원본 형식",
+      "target": "대상 형식",
+      "undetected_select": "인식 불가 — 직접 선택하세요",
+      "result_title": "변환 결과 · {{format}}",
+      "placeholder": "자막을 입력하면 변환 결과가 여기에 표시됩니다",
+      "failed": "변환 실패"
+    },
+    "validate": {
+      "placeholder": "자막을 입력하면 검사 결과가 여기에 표시됩니다",
+      "failed": "검사 실패",
+      "no_issues": "문제가 발견되지 않았습니다"
+    },
+    "normalize": {
+      "title": "텍스트 정규화",
+      "strip_tags": "HTML/ASS 태그 제거",
+      "run": "정규화",
+      "placeholder": "'정규화'를 클릭하여 자막을 처리하세요",
+      "failed": "정규화 실패:"
+    },
+    "repair": {
+      "title": "자막 복구",
+      "min_gap": "최소 간격 보장",
+      "merge_dup": "중복 줄 병합, 간격 ≤",
+      "rollup": "롤업 복구(인접한 동일 줄 병합)",
+      "edl_title": "컷 전환 규칙(Netflix 납품)",
+      "edl_pick": "EDL 선택",
+      "edl_loaded": "{{name}} · 컷 {{count}}개",
+      "edl_failed": "EDL 파싱 실패:",
+      "fps": "프레임레이트",
+      "before_frames": "컷 전",
+      "after_frames_sep": "프레임 확보 · 컷 후",
+      "frames": "프레임 확보",
+      "run": "복구 적용",
+      "placeholder": "복구 항목을 선택하고 '복구 적용'을 클릭하세요",
+      "failed": "복구 실패:",
+      "count_change": "자막 {{before}}개 → {{after}}개"
+    },
+    "info": {
+      "title": "자막 정보",
+      "placeholder": "자막을 입력하면 정보가 여기에 표시됩니다",
+      "failed": "자막을 파싱할 수 없습니다:",
+      "row_format": "형식",
+      "row_count": "자막 수",
+      "row_duration": "총 길이",
+      "row_first": "첫 타임스탬프",
+      "row_last": "마지막 타임스탬프"
+    }
+  },
+  "format": {
+    "srt": "SubRip (SRT)",
+    "vtt": "WebVTT (VTT)",
+    "ass": "Advanced SubStation (ASS)",
+    "ssa": "SubStation Alpha (SSA)",
+    "microdvd": "MicroDVD",
+    "spruce": "Spruce STL",
+    "subviewer": "SubViewer",
+    "ttml": "TTML / IMSC",
+    "dfxp": "DFXP",
+    "itt": "iTunes TT (ITT)",
+    "whisper": "Whisper JSON",
+    "sbv": "YouTube SBV",
+    "lrc": "LRC 가사",
+    "sami": "SAMI",
+    "mpl2": "MPL2",
+    "scc": "SCC (방송)",
+    "ebu_stl": "EBU STL (방송)"
+  },
+  "guideline": {
+    "basic": "기본",
+    "netflix": "Netflix 납품 사양",
+    "bbc": "BBC",
+    "ted": "TED",
+    "ard": "ARD/ORF/SRF/ZDF",
+    "channel4": "Channel 4"
+  },
+  "footer": {
+    "supported": "지원되는 형식:",
+    "based_on_prefix": "기반:",
+    "based_on_suffix": "Rust 라이브러리 · WebAssembly로 컴파일 · 100% 브라우저에서 실행"
+  },
+  "theme": {
+    "light": "라이트",
+    "dark": "다크",
+    "system": "시스템 따르기",
+    "toggle_title": "테마 전환"
+  },
+  "lang": {
+    "switch": "언어 변경"
+  }
+}
