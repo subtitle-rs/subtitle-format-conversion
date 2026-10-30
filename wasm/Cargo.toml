@@ -10,7 +10,7 @@ wasm-opt = false
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-subtitler = { version = "2.10.0", default-features = false, features = [
+subtitler = { version = "2.11.0", default-features = false, features = [
   "srt", "vtt", "ass", "ssa", "microdvd", "spruce", "subviewer",
   "ttml", "dfxp", "itt", "whisper", "sbv", "lrc", "sami",
   "mpl2", "scc", "ebu_stl", "wasm"

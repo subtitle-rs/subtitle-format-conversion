@@ -362,9 +362,9 @@ dependencies = [
 
 [[package]]
 name = "subtitler"
-version = "2.10.0"
+version = "2.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b036779c188ab243075e57901ae465daa97e1fe779f34d88a0e727516102d0f9"
+checksum = "969ce8a4ffbf3fc1fd6296806edb12230591e9b0ace1c2daa73d984d73d10193"
 dependencies = [
  "anyhow",
  "bitflags",
